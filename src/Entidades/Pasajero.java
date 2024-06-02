@@ -10,17 +10,18 @@ public class Pasajero {
     private String dni;
     private String correo;
     private String telefono;
-
+    private boolean estado;
     public Pasajero() {
     }
 
-    public Pasajero(int IdPasajero, String nombre, String apellido, String dni, String correo, String telefono) {
+    public Pasajero(int IdPasajero, String nombre, String apellido, String dni, String correo, String telefono,boolean estado) {
         this.IdPasajero = IdPasajero;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.correo = correo;
         this.telefono = telefono;
+        this.estado = estado;
     }
 
     public Pasajero(String nombre, String apellido, String dni, String correo, String telefono) {
@@ -79,6 +80,14 @@ public class Pasajero {
         this.telefono = telefono;
     }
 
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+    
     @Override
     public String toString() {
         return "Pasajero{" + "IdPasajero=" + IdPasajero + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", correo=" + correo + ", telefono=" + telefono + '}';

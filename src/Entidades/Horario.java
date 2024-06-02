@@ -10,15 +10,16 @@ public class Horario {
     private Ruta ruta;
     private LocalTime horaSalida;
     private LocalTime horaLlegada;
-
+    private boolean estado;
     public Horario() {
     }
 
-    public Horario(int IdHorario, Ruta ruta, LocalTime horaSalida, LocalTime horaLlegada) {
+    public Horario(int IdHorario, Ruta ruta, LocalTime horaSalida, LocalTime horaLlegada,boolean estado) {
         this.IdHorario = IdHorario;
         this.ruta = ruta;
         this.horaSalida = horaSalida;
         this.horaLlegada = horaLlegada;
+        this.estado = estado;
     }
 
     public Horario(Ruta ruta, LocalTime horaSalida, LocalTime horaLlegada) {
@@ -59,6 +60,14 @@ public class Horario {
         this.horaLlegada = horaLlegada;
     }
 
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+    
     @Override
     public String toString() {
         return "Horario{" + "IdHorario=" + IdHorario + ", ruta=" + ruta + ", horaSalida=" + horaSalida + ", horaLlegada=" + horaLlegada + '}';
