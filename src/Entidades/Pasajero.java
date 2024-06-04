@@ -24,7 +24,7 @@ public class Pasajero {
         this.estado = estado;
     }
 
-    public Pasajero(String nombre, String apellido, String dni, String correo, String telefono) {
+    public Pasajero(String nombre, String apellido, String dni, String correo, String telefono, boolean estado) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
