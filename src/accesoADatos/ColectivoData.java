@@ -42,6 +42,7 @@ public class ColectivoData {
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al insertar el bondi");
+            ex.printStackTrace();
         }
 
     }
@@ -50,7 +51,7 @@ public class ColectivoData {
     public void modificarColectivo(Colectivo colectivo) {
 
         String sql = "UPDATE `colectivos` SET matricula = ? , marca = ? , modelo = ? ,"
-                + "capacidad = ? , estado = ? WHERE idColectivo = ?";
+                + "capacidad = ? WHERE idColectivo = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -59,6 +60,7 @@ public class ColectivoData {
             ps.setString(3, colectivo.getModelo());
             ps.setInt(4, colectivo.getCapacidad());
             ps.setInt(5, colectivo.getIdColectivo());
+            
             int exito = ps.executeUpdate();
 
             if (exito == 1) {
@@ -67,13 +69,16 @@ public class ColectivoData {
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al modificar el bondi");
+            ex.printStackTrace();
+            
+            
         }
     }
     
     
     public void eliminarColectivo(int id) {
 
-        String sql = "UPDATE colectivo SET estado = 0  WHERE idColectivo = ? ";
+        String sql = "UPDATE colectivos SET estado = 0  WHERE idColectivo = ? ";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -86,14 +91,15 @@ public class ColectivoData {
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al eliminar el bondi!");
+            ex.printStackTrace();
         }
     }
 
     
     public Colectivo buscarColectivo(int id) {
 
-        String sql = "SELECT matricula, marca, modelo, capacidad"
-                + "FROM colectivos WHERE idColectivo = ? AND estado = ?";
+        String sql = "SELECT matricula, marca, modelo, capacidad "
+                + "FROM colectivos WHERE idColectivo = ? AND estado = 1";
         Colectivo colectivo = null;
         
         try {
@@ -104,6 +110,7 @@ public class ColectivoData {
             if (rs.next()) {
                 
                 colectivo = new Colectivo();
+                
                 colectivo.setIdColectivo(id);
                 colectivo.setMatricula(rs.getString("matricula"));
                 colectivo.setMarca(rs.getString("marca"));
@@ -134,8 +141,8 @@ public class ColectivoData {
     
     public List<Colectivo> listarColectivos() {
 
-        String sql = "SELECT idColectivo, matricula, marca, modelo, capacidad"
-                + "FROM colectivo WHERE estado = 1";
+        String sql = "SELECT idColectivo, matricula, marca, modelo, capacidad "
+                + "FROM colectivos WHERE estado = 1";
         
         ArrayList<Colectivo> colectivos = new ArrayList<>();
         
@@ -162,6 +169,7 @@ public class ColectivoData {
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al buscar el bondi ");
+            ex.printStackTrace();
         }
 
         return colectivos;

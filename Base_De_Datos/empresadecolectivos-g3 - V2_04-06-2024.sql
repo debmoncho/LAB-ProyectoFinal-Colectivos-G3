@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2024 at 04:57 AM
+-- Generation Time: Jun 04, 2024 at 04:48 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,6 +38,18 @@ CREATE TABLE `colectivos` (
   `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `colectivos`
+--
+
+INSERT INTO `colectivos` (`idColectivo`, `matricula`, `marca`, `modelo`, `capacidad`, `estado`) VALUES
+(1, '875SPX', 'Mercedes Benz', 'XT1000', 45, 0),
+(2, '875SPX', 'Airton Menta', 'XT1000', 45, 1),
+(3, '951TBX', 'LG', 'Terreneitor', 60, 1),
+(4, '654LOL', 'SONY', 'ToT', 45, 1),
+(5, '842IKJ', 'Peugeot', 'Lambo', 60, 1),
+(6, '657AAB', 'LaHora', 'DarkThtrone', 60, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -63,8 +75,17 @@ CREATE TABLE `pasajeros` (
   `apellido` varchar(30) NOT NULL,
   `dni` varchar(30) NOT NULL,
   `correo` varchar(30) NOT NULL,
-  `telefono` varchar(30) NOT NULL
+  `telefono` varchar(30) NOT NULL,
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pasajeros`
+--
+
+INSERT INTO `pasajeros` (`idPasajero`, `nombre`, `apellido`, `dni`, `correo`, `telefono`, `estado`) VALUES
+(1, 'Javier Alejandro', 'Pepon', '51489753', 'lala@gmail.com', '2665854796', 1),
+(3, 'Luis', 'Mercado', '12159741', 'lilo@gmail.com', '4459874', 0);
 
 -- --------------------------------------------------------
 
@@ -143,7 +164,7 @@ ALTER TABLE `rutas`
 -- AUTO_INCREMENT for table `colectivos`
 --
 ALTER TABLE `colectivos`
-  MODIFY `idColectivo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idColectivo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `horarios`
@@ -155,7 +176,7 @@ ALTER TABLE `horarios`
 -- AUTO_INCREMENT for table `pasajeros`
 --
 ALTER TABLE `pasajeros`
-  MODIFY `idPasajero` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPasajero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pasajes`
