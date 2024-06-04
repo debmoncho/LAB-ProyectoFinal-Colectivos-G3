@@ -70,12 +70,12 @@ public class Colectivo {
         this.capacidad = capacidad;
     }
 
-    public boolean isEsatado() {
+    public boolean isEstado() {
         return estado;
     }
 
-    public void setEsatado(boolean esatado) {
-        this.estado = esatado;
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
     
     @Override
