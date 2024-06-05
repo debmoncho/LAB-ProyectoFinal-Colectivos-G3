@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -55,5 +57,80 @@ public class RutaData {
             JOptionPane.showMessageDialog(null, "Ruta Incorrecta");
         }
         
+    }
+    
+    public void eliminarRuta(int idRuta){
+        
+        String sql = "UPDATE rutas SET estado = 0 WHERE idRuta = ?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idRuta);
+            int exito = ps.executeUpdate();
+            
+            if(exito == 1){
+                JOptionPane.showMessageDialog(null,"Se a Eliminado La Ruta Correctamente");
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al eliminar Ruta");
+        }
+        
+    }
+    
+    public Ruta buscarRuta(int idRuta){
+    
+        String sql = "SELECT * FROM rutas WHERE rutas = ? AND estado = 1";
+        Ruta ruta= null;
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idRuta);
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs.next()){
+            
+                ruta = new Ruta();
+                ruta.setOrigen(rs.getString("origen"));
+                ruta.setDestino(rs.getString("destino"));
+                ruta.setDuracionEstimada(rs.getTime("duracionEstimada").toLocalTime());
+                ruta.setEstado(true);
+            }else{
+                JOptionPane.showMessageDialog(null, "La ruta no Existe");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Ruta No Cargada en el Sistema");
+        }
+        return ruta;
+    }
+    
+    public List<Ruta> listarRuta(){
+        String sql = "SELECT idRuta , origen, destino, duracionEstimada"
+        + "FROM rutas WHERE estado = 1";
+        ArrayList<Ruta> rutas = new ArrayList<>();
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+            
+                Ruta ruta = new Ruta();
+                
+                ruta.setOrigen(rs.getString("idRuta"));
+                ruta.setDestino(rs.getString("destino"));
+                ruta.setDuracionEstimada(rs.getTime("duracionEstimada").toLocalTime());
+                ruta.setEstado(true);
+                
+                rutas.add(ruta);
+            
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al listar Ruta");
+        }
+        
+        return rutas;
     }
 }
