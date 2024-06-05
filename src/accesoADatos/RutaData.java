@@ -133,4 +133,24 @@ public class RutaData {
         
         return rutas;
     }
+    
+    public void actualiazRuta(Ruta ruta){
+    
+        String sql = "UPDATE rutas SET origen = ?, destino = ?, duracionEstimada = ?, estado = ? WHERE idRuta = ?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setString(1, ruta.getOrigen());
+            ps.setString(2, ruta.getDestino());
+            ps.setTime(3,Time.valueOf(ruta.getDuracionEstimada()));
+            ps.setBoolean(4, ruta.isEstado());
+            ps.setInt(5, ruta.getIdRuta());
+            
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"La Ruta sin Problemas");
+        }
+        
+    }
 }
