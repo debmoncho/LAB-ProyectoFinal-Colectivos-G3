@@ -71,7 +71,7 @@ public class LABProyectoFinalColectivosG3 {
             //ver los elementos con un to string System
 //            System.out.println(pasajero);
 //            System.out.println("");
-        }
+//        }
         
 
 // -------------------------------------------------------------------------------------------------
