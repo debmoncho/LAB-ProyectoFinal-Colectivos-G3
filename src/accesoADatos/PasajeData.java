@@ -44,7 +44,7 @@ public class PasajeData {
             
             ResultSet rs = ps.getGeneratedKeys();
             
-            if(rs.next()){
+            if(rs.next() ){
                 
                 pasaje.setIdPasaje(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Pasaje vendido exitosamente!");
@@ -247,6 +247,97 @@ public class PasajeData {
             PreparedStatement ps = con.prepareStatement(sql);
 
             ps.setInt(1, idRuta);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                Pasaje pasaje = new Pasaje();
+
+                pasaje.setIdPasaje(rs.getInt("idPasaje"));
+
+                Pasajero pedro = pd.buscarPasajero(rs.getInt("idPasajero"));
+                Ruta cordoba = rd.buscarRuta(rs.getInt("idRuta"));
+                Colectivo scania = cd.buscarColectivo(rs.getInt("idColectivo"));
+
+                pasaje.setPasajero(pedro);
+                pasaje.setRuta(cordoba);
+                pasaje.setColectivo(scania);
+                
+                
+                pasaje.setFechaViaje(rs.getDate("fechaViaje").toLocalDate());
+                pasaje.setHoraViaje(rs.getTime("horaViaje").toLocalTime());
+                pasaje.setAsiento(rs.getInt("asiento"));
+                pasaje.setPrecio(rs.getDouble("precio"));
+
+                vendidos.add(pasaje);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(null, "No se ha podido obtener la venta del pasaje");
+        }
+
+        return vendidos;
+
+    }
+    
+    public List<Pasaje> obtenerPasajeVendidoPorFecha(LocalDate fechaViaje) {
+
+        ArrayList<Pasaje> vendidos = new ArrayList<>();
+
+        String sql = "SELECT * FROM pasajes WHERE fechaViaje = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setDate(1, Date.valueOf(fechaViaje));
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                Pasaje pasaje = new Pasaje();
+
+                pasaje.setIdPasaje(rs.getInt("idPasaje"));
+
+                Pasajero pedro = pd.buscarPasajero(rs.getInt("idPasajero"));
+                Ruta cordoba = rd.buscarRuta(rs.getInt("idRuta"));
+                Colectivo scania = cd.buscarColectivo(rs.getInt("idColectivo"));
+
+                pasaje.setPasajero(pedro);
+                pasaje.setRuta(cordoba);
+                pasaje.setColectivo(scania);
+                
+                
+                pasaje.setFechaViaje(rs.getDate("fechaViaje").toLocalDate());
+                pasaje.setHoraViaje(rs.getTime("horaViaje").toLocalTime());
+                pasaje.setAsiento(rs.getInt("asiento"));
+                pasaje.setPrecio(rs.getDouble("precio"));
+
+                vendidos.add(pasaje);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(null, "No se ha podido obtener la venta del pasaje");
+        }
+
+        return vendidos;
+    }
+    
+        public List<Pasaje> obtenerPasajeVendidoPorHorario(LocalTime horaViaje) {
+
+        ArrayList<Pasaje> vendidos = new ArrayList<>();
+
+        String sql = "SELECT * FROM pasajes WHERE horaViaje = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setTime(1, Time.valueOf(horaViaje));
 
             ResultSet rs = ps.executeQuery();
 
