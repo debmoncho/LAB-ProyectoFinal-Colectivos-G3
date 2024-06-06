@@ -80,7 +80,7 @@ public class RutaData {
     
     public Ruta buscarRuta(int idRuta){
     
-        String sql = "SELECT * FROM rutas WHERE idRuta = ? AND estado = 1";
+        String sql = "SELECT  origen, destino, duracionEstimada FROM rutas WHERE idRuta = ? AND estado = 1";
         Ruta ruta= null;
         
         try {
@@ -91,10 +91,12 @@ public class RutaData {
             if(rs.next()){
             
                 ruta = new Ruta();
+                ruta.setIdRuta(idRuta);
                 ruta.setOrigen(rs.getString("origen"));
                 ruta.setDestino(rs.getString("destino"));
                 ruta.setDuracionEstimada(rs.getTime("duracionEstimada").toLocalTime());
                 ruta.setEstado(true);
+                
                 
             }else{
                 JOptionPane.showMessageDialog(null, "La ruta no Existe ");
@@ -108,11 +110,12 @@ public class RutaData {
     
     public List<Ruta> listarRuta(){
         String sql = "SELECT idRuta , origen, destino, duracionEstimada"
-        + "FROM rutas WHERE estado = 1";
+        + " FROM rutas WHERE estado = 1";
         ArrayList<Ruta> rutas = new ArrayList<>();
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
+            
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
