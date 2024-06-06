@@ -90,6 +90,7 @@ public class Horarios extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(204, 255, 204));
         jButton2.setText("Añadir");
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
@@ -154,6 +155,7 @@ public class Horarios extends javax.swing.JInternalFrame {
         jRadioButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jRadioButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        jButton3.setBackground(new java.awt.Color(153, 204, 255));
         jButton3.setText("Buscar");
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
