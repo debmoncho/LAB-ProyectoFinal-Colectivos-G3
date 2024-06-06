@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -55,7 +56,7 @@ public class HorarioData {
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al insertar el horario "+ex);
+            JOptionPane.showMessageDialog(null, "Error al insertar el horario " + ex);
 
         }
 
@@ -111,64 +112,88 @@ public class HorarioData {
             PreparedStatement ps = con.prepareStatement(sql);
 
             ps.setInt(1, idRuta);
-            
+
             ResultSet rs = ps.executeQuery();
-            
-            while(rs.next()){
-                Horario horarios=new Horario();
-                
+
+            while (rs.next()) {
+                Horario horarios = new Horario();
+
                 horarios.setIdHorario(rs.getInt("idHorario"));
-                Ruta ruta=rd.buscarRuta(rs.getInt("idRuta"));
-                
-                horarios.setRuta(ruta);
-                hora.add(horarios);           
+                Ruta ruta = rd.buscarRuta(rs.getInt("idRuta"));
+                horarios.setRuta(ruta);               
+                horarios.setHoraLlegada(rs.getTime("horaLlegada").toLocalTime());
+                horarios.setHoraSalida(rs.getTime("horaSalida").toLocalTime());
+                horarios.setEstado(rs.getBoolean("estado"));
+                hora.add(horarios);
             }
-            
+
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al buscar horario por ruta " +ex);
+            JOptionPane.showMessageDialog(null, "Error al buscar horario por ruta " + ex);
         }
         return hora;
     }
-    
-    public List<Horario> obtenerTodosLosHorarios(){
-        
-         ArrayList<Horario> hora = new ArrayList<>();
-        
+
+    public List<Horario> obtenerTodosLosHorarios() {
+
+        ArrayList<Horario> hora = new ArrayList<>();
+
         String sql = "SELECT * FROM horarios";
-        
+
         try {
-            PreparedStatement ps=con.prepareStatement(sql);
-            ResultSet rs=ps.executeQuery();
-            
-            while(rs.next()){
-                
-                Horario horario=new Horario();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                Horario horario = new Horario();
                 horario.setIdHorario(rs.getInt("idHorario"));
-                Ruta ruta=rd.buscarRuta(rs.getInt("idRuta"));
+                Ruta ruta = rd.buscarRuta(rs.getInt("idRuta"));
                 horario.setRuta(ruta);
                 horario.setHoraSalida(rs.getTime("horaSalida").toLocalTime());
-                 horario.setHoraLlegada(rs.getTime("horaLlegada").toLocalTime());               
-                 
-                 hora.add(horario);
+                horario.setHoraLlegada(rs.getTime("horaLlegada").toLocalTime());
+                horario.setEstado(rs.getBoolean("estado"));
+
+                hora.add(horario);
             }
-            
+
             ps.close();
-            
+
         } catch (SQLException ex) {
-              JOptionPane.showMessageDialog(null, "Error al obtener todos los horarios " +ex);
+            JOptionPane.showMessageDialog(null, "Error al obtener todos los horarios " + ex);
         }
-        
+
         return hora;
-        
+
     }
-    
-    
-    
-    
+
+    public List<Horario> obtenerHorarioPorHoraSalida(LocalTime horaSalida) {
+
+        String sql = "SELECT * FROM Horarios WHERE horaSalida = ?";
+        List<Horario> hora = new ArrayList<>();
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setTime(1, Time.valueOf(horaSalida));
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Horario horario = new Horario();
+                horario.setIdHorario(rs.getInt("idHorario"));
+                Ruta ruta = rd.buscarRuta(rs.getInt("idRuta"));
+                horario.setRuta(ruta);
+                horario.setHoraSalida(rs.getTime("horaSalida").toLocalTime());
+                horario.setHoraLlegada(rs.getTime("horaLlegada").toLocalTime());
+                horario.setEstado(rs.getBoolean("estado"));
+                hora.add(horario);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al obtener todos los horarios por hora salida " + ex);
+        }
+        return hora;
+    }
 
 }
-
-
-

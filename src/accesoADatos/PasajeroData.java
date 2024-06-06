@@ -159,6 +159,38 @@ public class PasajeroData {
         return pasajero;
     }
     
+    public Pasajero buscarPasajeroPorApellido(String apellido) {
+
+        String sql = "SELECT idPasajero, nombre, apellido, dni, correo, telefono FROM pasajeros WHERE apellido= ? AND estado= 1";
+        Pasajero pasajero = null;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, apellido);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                pasajero = new Pasajero();
+                pasajero.setIdPasajero(rs.getInt("idPasajero"));
+                pasajero.setNombre(rs.getString("nombre"));
+                pasajero.setApellido(rs.getString("apellido"));
+                pasajero.setDni(rs.getString("dni"));
+                pasajero.setCorreo(rs.getString("correo"));
+                pasajero.setTelefono(rs.getString("telefono"));
+
+                pasajero.setEstado(true);
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe ese pasajero");
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al buscar el pasajero ");
+        }
+        
+        return pasajero;
+    }
+    
     public List<Pasajero> listarPasajero() {
          
         String sql = "SELECT  idPasajero, nombre, apellido, dni, correo, telefono FROM pasajeros WHERE  estado= 1";

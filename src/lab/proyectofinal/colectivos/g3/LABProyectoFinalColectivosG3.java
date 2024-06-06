@@ -133,9 +133,11 @@ public class LABProyectoFinalColectivosG3 {
 //
 //Horario horario2=new Horario(2, ruta, LocalTime.MAX, LocalTime.MIN, true);
 
+//Horario horario3=new Horario(3, ruta, LocalTime.of(22,30), LocalTime.of(23,50), true);
+
  HorarioData hd=new HorarioData();
  
- //hd.guardarHorario(horario);
+// hd.guardarHorario(horario3);
  
 //  hd.guardarHorario(horario2);
  
@@ -143,9 +145,9 @@ public class LABProyectoFinalColectivosG3 {
  
 // hd.eliminarHorario(1);
 
+//buscar horario por ruta
 
-
-for(Horario elemento:hd.obtenerHorarioPorRuta(2)){
+for(Horario elemento:hd.obtenerHorarioPorRuta(3)){
     System.out.println(" ");
     System.out.println(elemento.getIdHorario());
     System.out.println(elemento.getRuta());
@@ -153,7 +155,34 @@ for(Horario elemento:hd.obtenerHorarioPorRuta(2)){
     System.out.println(elemento.getHoraSalida());
     System.out.println(elemento.isEstado());
 }
- 
+
+   //mostrar todos los horarios
+   
+//   for (Horario elemento : hd.obtenerTodosLosHorarios()) {
+//    System.out.println(" ");
+//    System.out.println("ID Horario: " + elemento.getIdHorario());
+//    System.out.println("Ruta: " + elemento.getRuta());
+//    System.out.println("Hora de Salida: " + elemento.getHoraSalida());
+//    System.out.println("Hora de Llegada: " + elemento.getHoraLlegada());
+//    System.out.println("Estado: " + elemento.isEstado());
+//}
+   
+//mostrar horarios por hora de salida
+
+ for (Horario elemento : hd.obtenerHorarioPorHoraSalida(LocalTime.of(22, 30))) {
+    System.out.println(" ");
+    System.out.println("ID Horario: " + elemento.getIdHorario());
+    System.out.println("Ruta: " + elemento.getRuta());
+    System.out.println("Hora de Salida: " + elemento.getHoraSalida());
+    System.out.println("Hora de Llegada: " + elemento.getHoraLlegada());
+    System.out.println("Estado: " + elemento.isEstado());
+}
+
+
+
     }
+ 
+ 
+    
 
 }
