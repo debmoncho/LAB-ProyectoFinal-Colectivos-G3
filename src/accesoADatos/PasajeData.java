@@ -16,7 +16,8 @@ public class PasajeData {
     
     //declarar clases datas
     private PasajeroData pd = new PasajeroData();
-//    private RutaData rd = new RutaData();
+    private RutaData rd = new RutaData();
+    private ColectivoData cd = new ColectivoData();
 
     public PasajeData() {
         con = Conexion.getConexion();
@@ -167,12 +168,12 @@ public class PasajeData {
                 pasaje.setIdPasaje(rs.getInt("idPasaje"));
 
                 Pasajero pedro = pd.buscarPasajero(rs.getInt("idPasajero"));
-
-//                Ruta cordoba = rd.buscarRuta(rs.getInt("idRuta"));
+                Ruta cordoba = rd.buscarRuta(rs.getInt("idRuta"));
+                Colectivo scania = cd.buscarColectivo(rs.getInt("idColectivo"));
 
                 pasaje.setPasajero(pedro);
-//                pasaje.setRuta(cordoba);
-//                falta colectivo - idcolectivo, hace falta??
+                pasaje.setRuta(cordoba);
+                pasaje.setColectivo(scania);
                 
                 pasaje.setFechaViaje(rs.getDate("fechaViaje").toLocalDate());
                 pasaje.setHoraViaje(rs.getTime("horaViaje").toLocalTime());
@@ -210,12 +211,13 @@ public class PasajeData {
                 pasaje.setIdPasaje(rs.getInt("idPasaje"));
 
                 Pasajero pedro = pd.buscarPasajero(rs.getInt("idPasajero"));
-
-//                Ruta cordoba = rd.buscarRuta(rs.getInt("idRuta"));
+                Ruta cordoba = rd.buscarRuta(rs.getInt("idRuta"));
+                Colectivo scania = cd.buscarColectivo(rs.getInt("idColectivo"));
 
                 pasaje.setPasajero(pedro);
-//                pasaje.setRuta(cordoba);
-//                falta colectivo - idcolectivo, hace falta??
+                pasaje.setRuta(cordoba);
+                pasaje.setColectivo(scania);
+                
                 
                 pasaje.setFechaViaje(rs.getDate("fechaViaje").toLocalDate());
                 pasaje.setHoraViaje(rs.getTime("horaViaje").toLocalTime());
@@ -228,7 +230,53 @@ public class PasajeData {
 
         } catch (SQLException ex) {
 
-            JOptionPane.showMessageDialog(null, "No se ha podido realizar la venta del pasaje");
+            JOptionPane.showMessageDialog(null, "No se ha podido obtener la venta del pasaje");
+        }
+
+        return vendidos;
+
+    }
+    
+    public List<Pasaje> obtenerPasajeVendidoPorRuta(int idRuta) {
+
+        ArrayList<Pasaje> vendidos = new ArrayList<>();
+
+        String sql = "SELECT * FROM pasajes WHERE idRuta = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setInt(1, idRuta);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                Pasaje pasaje = new Pasaje();
+
+                pasaje.setIdPasaje(rs.getInt("idPasaje"));
+
+                Pasajero pedro = pd.buscarPasajero(rs.getInt("idPasajero"));
+                Ruta cordoba = rd.buscarRuta(rs.getInt("idRuta"));
+                Colectivo scania = cd.buscarColectivo(rs.getInt("idColectivo"));
+
+                pasaje.setPasajero(pedro);
+                pasaje.setRuta(cordoba);
+                pasaje.setColectivo(scania);
+                
+                
+                pasaje.setFechaViaje(rs.getDate("fechaViaje").toLocalDate());
+                pasaje.setHoraViaje(rs.getTime("horaViaje").toLocalTime());
+                pasaje.setAsiento(rs.getInt("asiento"));
+                pasaje.setPrecio(rs.getDouble("precio"));
+
+                vendidos.add(pasaje);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(null, "No se ha podido obtener la venta del pasaje");
         }
 
         return vendidos;
