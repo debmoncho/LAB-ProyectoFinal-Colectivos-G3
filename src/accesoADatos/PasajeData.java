@@ -44,7 +44,7 @@ public class PasajeData {
             
             ResultSet rs = ps.getGeneratedKeys();
             
-            if(rs.next()){
+            if(rs.next() ){
                 
                 pasaje.setIdPasaje(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Pasaje vendido exitosamente!");

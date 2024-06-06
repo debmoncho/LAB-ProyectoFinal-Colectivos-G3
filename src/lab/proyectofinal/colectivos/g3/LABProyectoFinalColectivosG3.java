@@ -202,6 +202,9 @@ PasajeroData pd = new PasajeroData();
 
 //pl.obtenerPasajes();
 //
+
+// OBTENER TODOS LOS PASAJES
+
 // for(Pasaje pasaje: pl.obtenerPasajes()){
 //     System.out.println("");
 //     System.out.println("id pasaje: "+pasaje.getIdPasaje() );
@@ -215,19 +218,22 @@ PasajeroData pd = new PasajeroData();
 //     System.out.println("");
 // }
 
- for(Pasaje pasaje:pl.obtenerPasajeVendidoPorPasajero(4)){
-      System.out.println("");
-     System.out.println("id pasaje: "+pasaje.getIdPasaje() );
-     System.out.println(pasaje.getPasajero());
-     System.out.println(pasaje.getColectivo());
-     System.out.println(pasaje.getRuta());
-     System.out.println("fecha de viaje "+pasaje.getFechaViaje());
-     System.out.println("horario de viaje "+pasaje.getHoraViaje());
-     System.out.println("asiento "+pasaje.getAsiento());
-     System.out.println("precio "+pasaje.getPrecio());
-     System.out.println("");
- }
- 
+
+// OBTENER PASAJE POR PASAJERO
+
+// for(Pasaje pasaje:pl.obtenerPasajeVendidoPorPasajero(4)){
+//      System.out.println("");
+//     System.out.println("id pasaje: "+pasaje.getIdPasaje() );
+//     System.out.println(pasaje.getPasajero());
+//     System.out.println(pasaje.getColectivo());
+//     System.out.println(pasaje.getRuta());
+//     System.out.println("fecha de viaje "+pasaje.getFechaViaje());
+//     System.out.println("horario de viaje "+pasaje.getHoraViaje());
+//     System.out.println("asiento "+pasaje.getAsiento());
+//     System.out.println("precio "+pasaje.getPrecio());
+//     System.out.println("");
+// }
+// 
  
 
 
