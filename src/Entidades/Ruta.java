@@ -22,7 +22,7 @@ public class Ruta {
         this.estado = estado;
     }
 
-    public Ruta(String origen, String destino, LocalTime duracionEstimada) {
+    public Ruta(String origen, String destino, LocalTime duracionEstimada,boolean estado) {
         this.origen = origen;
         this.destino = destino;
         this.duracionEstimada = duracionEstimada;

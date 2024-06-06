@@ -97,15 +97,36 @@ public class LABProyectoFinalColectivosG3 {
 //            System.out.println("");
 //        }
 //------------------------------------------------------------------------------------------------
-      Ruta ruta = new Ruta(1,"San luis", "Merlo", LocalTime.of(4, 25),true);
+//      Ruta ruta = new Ruta("Flores", "San Luis", LocalTime.of(0, 40),true);
+// 
+////
+       RutaData rd = new RutaData();
+       
+       for(Ruta ru : rd.listarRuta()){
+           System.out.println("");
+           System.out.println(ru.getIdRuta());
+           System.out.println(ru.getOrigen());
+           System.out.println(ru.getDestino());
+           System.out.println(ru.getDuracionEstimada());
+           System.out.println("");
+       }
+       
+       
+       
+//      rd.guardarRuta(ruta);
+//      Ruta rutaEncontrada = rd.buscarRuta(3);
+//        System.out.println("Id: "+rutaEncontrada.getIdRuta());
+//        System.out.println("Origen: "+rutaEncontrada.getOrigen());
+//        System.out.println("Destino: "+rutaEncontrada.getDestino());
+//        System.out.println("Duracion: "+rutaEncontrada.getDuracionEstimada());
+//        
+//     rutaEncontrada.setDestino("Tacamandapio");
+//     rd.actualiazRuta(rutaEncontrada);
       
-//
-      RutaData rd = new RutaData();
-        
 //        rd.guardarRuta(ruta);
 
  //rd.actualiazRuta(ruta);
-    
+ // rd.eliminarRuta(4);
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 
 //Horario horario=new Horario(1,ruta, LocalTime.now(), LocalTime.now(),true);
