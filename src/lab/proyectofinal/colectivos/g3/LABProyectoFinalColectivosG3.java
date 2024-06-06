@@ -233,7 +233,34 @@ PasajeroData pd = new PasajeroData();
 //     System.out.println("precio "+pasaje.getPrecio());
 //     System.out.println("");
 // }
-// 
+//  OBTENER PASAJE POR LAS FECHAS
+
+//    for(Pasaje pasaje:pl.obtenerPasajeVendidoPorFecha(LocalDate.of(2024,03,25))){
+//          System.out.println("");
+//     System.out.println("id pasaje: "+pasaje.getIdPasaje() );
+//     System.out.println(pasaje.getPasajero());
+//     System.out.println(pasaje.getColectivo());
+//     System.out.println(pasaje.getRuta());
+//     System.out.println("fecha de viaje "+pasaje.getFechaViaje());
+//     System.out.println("horario de viaje "+pasaje.getHoraViaje());
+//     System.out.println("asiento "+pasaje.getAsiento());
+//     System.out.println("precio "+pasaje.getPrecio());
+//    }
+
+//OBTENER PASAJE POR HORARIO
+
+for(Pasaje pasaje:pl.obtenerPasajeVendidoPorHorario(LocalTime.of(4,20))){
+      System.out.println("");
+     System.out.println("id pasaje: "+pasaje.getIdPasaje() );
+     System.out.println(pasaje.getPasajero());
+     System.out.println(pasaje.getColectivo());
+     System.out.println(pasaje.getRuta());
+     System.out.println("fecha de viaje "+pasaje.getFechaViaje());
+     System.out.println("horario de viaje "+pasaje.getHoraViaje());
+     System.out.println("asiento "+pasaje.getAsiento());
+     System.out.println("precio "+pasaje.getPrecio());
+}
+
  
 
 
