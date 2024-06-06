@@ -105,7 +105,7 @@ public class HorarioData {
 
         ArrayList<Horario> hora = new ArrayList<>();
 
-        String sql = "SELECT * FROM horarios WHERE idRuta = ?";
+        String sql = "SELECT * FROM horarios WHERE idRuta  = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);

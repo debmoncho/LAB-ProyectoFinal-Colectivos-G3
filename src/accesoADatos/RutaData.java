@@ -95,6 +95,7 @@ public class RutaData {
                 ruta.setDestino(rs.getString("destino"));
                 ruta.setDuracionEstimada(rs.getTime("duracionEstimada").toLocalTime());
                 ruta.setEstado(true);
+                
             }else{
                 JOptionPane.showMessageDialog(null, "La ruta no Existe ");
             }
@@ -147,7 +148,13 @@ public class RutaData {
             ps.setBoolean(4, ruta.isEstado());
             ps.setInt(5, ruta.getIdRuta());
             
-            ps.executeUpdate();
+              int exit = ps.executeUpdate();
+
+             if (exit == 1) {
+                JOptionPane.showMessageDialog(null, "Ruta modificada!");
+             }
+            
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"La Ruta sin Problemas");
         }

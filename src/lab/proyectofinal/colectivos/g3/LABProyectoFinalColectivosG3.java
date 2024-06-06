@@ -104,7 +104,7 @@ public class LABProyectoFinalColectivosG3 {
         
 //        rd.guardarRuta(ruta);
 
-    rd.actualiazRuta(ruta);
+ //rd.actualiazRuta(ruta);
     
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -133,7 +133,6 @@ for(Horario elemento:hd.obtenerHorarioPorRuta(2)){
     System.out.println(elemento.isEstado());
 }
  
-
     }
 
 }
