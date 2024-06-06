@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 04, 2024 at 04:48 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 06-06-2024 a las 17:03:02
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `empresadecolectivos-g3`
+-- Base de datos: `empresadecolectivos-g3`
 --
 CREATE DATABASE IF NOT EXISTS `empresadecolectivos-g3` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `empresadecolectivos-g3`;
@@ -26,7 +26,7 @@ USE `empresadecolectivos-g3`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `colectivos`
+-- Estructura de tabla para la tabla `colectivos`
 --
 
 CREATE TABLE `colectivos` (
@@ -39,7 +39,7 @@ CREATE TABLE `colectivos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `colectivos`
+-- Volcado de datos para la tabla `colectivos`
 --
 
 INSERT INTO `colectivos` (`idColectivo`, `matricula`, `marca`, `modelo`, `capacidad`, `estado`) VALUES
@@ -53,20 +53,30 @@ INSERT INTO `colectivos` (`idColectivo`, `matricula`, `marca`, `modelo`, `capaci
 -- --------------------------------------------------------
 
 --
--- Table structure for table `horarios`
+-- Estructura de tabla para la tabla `horarios`
 --
 
 CREATE TABLE `horarios` (
   `idHorario` int(11) NOT NULL,
   `idRuta` int(11) NOT NULL,
   `horaSalida` time NOT NULL,
-  `horaLlegada` time NOT NULL
+  `horaLlegada` time NOT NULL,
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `horarios`
+--
+
+INSERT INTO `horarios` (`idHorario`, `idRuta`, `horaSalida`, `horaLlegada`, `estado`) VALUES
+(1, 2, '22:32:18', '22:32:18', 0),
+(5, 3, '23:59:59', '00:00:00', 1),
+(7, 1, '22:30:00', '23:50:00', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pasajeros`
+-- Estructura de tabla para la tabla `pasajeros`
 --
 
 CREATE TABLE `pasajeros` (
@@ -80,7 +90,7 @@ CREATE TABLE `pasajeros` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `pasajeros`
+-- Volcado de datos para la tabla `pasajeros`
 --
 
 INSERT INTO `pasajeros` (`idPasajero`, `nombre`, `apellido`, `dni`, `correo`, `telefono`, `estado`) VALUES
@@ -90,7 +100,7 @@ INSERT INTO `pasajeros` (`idPasajero`, `nombre`, `apellido`, `dni`, `correo`, `t
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pasajes`
+-- Estructura de tabla para la tabla `pasajes`
 --
 
 CREATE TABLE `pasajes` (
@@ -107,42 +117,52 @@ CREATE TABLE `pasajes` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rutas`
+-- Estructura de tabla para la tabla `rutas`
 --
 
 CREATE TABLE `rutas` (
   `idRuta` int(11) NOT NULL,
   `origen` varchar(30) NOT NULL,
   `destino` varchar(30) NOT NULL,
-  `duracionEstimada` time NOT NULL
+  `duracionEstimada` time NOT NULL,
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Indexes for dumped tables
+-- Volcado de datos para la tabla `rutas`
+--
+
+INSERT INTO `rutas` (`idRuta`, `origen`, `destino`, `duracionEstimada`, `estado`) VALUES
+(1, 'San luis', 'Merlo', '04:25:00', 1),
+(2, 'San luis', 'Merlo', '04:30:00', 1),
+(3, 'San luis', 'Merlo', '04:25:00', 1);
+
+--
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `colectivos`
+-- Indices de la tabla `colectivos`
 --
 ALTER TABLE `colectivos`
   ADD PRIMARY KEY (`idColectivo`);
 
 --
--- Indexes for table `horarios`
+-- Indices de la tabla `horarios`
 --
 ALTER TABLE `horarios`
   ADD PRIMARY KEY (`idHorario`),
   ADD KEY `idRuta` (`idRuta`);
 
 --
--- Indexes for table `pasajeros`
+-- Indices de la tabla `pasajeros`
 --
 ALTER TABLE `pasajeros`
   ADD PRIMARY KEY (`idPasajero`),
   ADD UNIQUE KEY `dni` (`dni`,`correo`);
 
 --
--- Indexes for table `pasajes`
+-- Indices de la tabla `pasajes`
 --
 ALTER TABLE `pasajes`
   ADD PRIMARY KEY (`idPasaje`),
@@ -151,57 +171,57 @@ ALTER TABLE `pasajes`
   ADD KEY `idRuta` (`idRuta`);
 
 --
--- Indexes for table `rutas`
+-- Indices de la tabla `rutas`
 --
 ALTER TABLE `rutas`
   ADD PRIMARY KEY (`idRuta`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `colectivos`
+-- AUTO_INCREMENT de la tabla `colectivos`
 --
 ALTER TABLE `colectivos`
   MODIFY `idColectivo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `horarios`
+-- AUTO_INCREMENT de la tabla `horarios`
 --
 ALTER TABLE `horarios`
-  MODIFY `idHorario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idHorario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `pasajeros`
+-- AUTO_INCREMENT de la tabla `pasajeros`
 --
 ALTER TABLE `pasajeros`
   MODIFY `idPasajero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `pasajes`
+-- AUTO_INCREMENT de la tabla `pasajes`
 --
 ALTER TABLE `pasajes`
   MODIFY `idPasaje` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `rutas`
+-- AUTO_INCREMENT de la tabla `rutas`
 --
 ALTER TABLE `rutas`
-  MODIFY `idRuta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idRuta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `horarios`
+-- Filtros para la tabla `horarios`
 --
 ALTER TABLE `horarios`
   ADD CONSTRAINT `horarios_ibfk_1` FOREIGN KEY (`idRuta`) REFERENCES `rutas` (`idRuta`);
 
 --
--- Constraints for table `pasajes`
+-- Filtros para la tabla `pasajes`
 --
 ALTER TABLE `pasajes`
   ADD CONSTRAINT `pasajes_ibfk_1` FOREIGN KEY (`idPasajero`) REFERENCES `pasajeros` (`idPasajero`),
