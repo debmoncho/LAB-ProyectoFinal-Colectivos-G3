@@ -54,7 +54,7 @@ public class RutaData {
             ps.close();
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Ruta Incorrecta");
+            JOptionPane.showMessageDialog(null, "Ruta Incorrecta " + ex);
         }
         
     }
@@ -80,7 +80,7 @@ public class RutaData {
     
     public Ruta buscarRuta(int idRuta){
     
-        String sql = "SELECT * FROM rutas WHERE rutas = ? AND estado = 1";
+        String sql = "SELECT * FROM rutas WHERE idRuta = ? AND estado = 1";
         Ruta ruta= null;
         
         try {
@@ -96,11 +96,11 @@ public class RutaData {
                 ruta.setDuracionEstimada(rs.getTime("duracionEstimada").toLocalTime());
                 ruta.setEstado(true);
             }else{
-                JOptionPane.showMessageDialog(null, "La ruta no Existe");
+                JOptionPane.showMessageDialog(null, "La ruta no Existe ");
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Ruta No Cargada en el Sistema");
+            JOptionPane.showMessageDialog(null, "Ruta No Cargada en el Sistema "+ex);
         }
         return ruta;
     }
