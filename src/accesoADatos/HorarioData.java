@@ -131,5 +131,44 @@ public class HorarioData {
         }
         return hora;
     }
+    
+    public List<Horario> obtenerTodosLosHorarios(){
+        
+         ArrayList<Horario> hora = new ArrayList<>();
+        
+        String sql = "SELECT * FROM horarios";
+        
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ResultSet rs=ps.executeQuery();
+            
+            while(rs.next()){
+                
+                Horario horario=new Horario();
+                horario.setIdHorario(rs.getInt("idHorario"));
+                Ruta ruta=rd.buscarRuta(rs.getInt("idRuta"));
+                horario.setRuta(ruta);
+                horario.setHoraSalida(rs.getTime("horaSalida").toLocalTime());
+                 horario.setHoraLlegada(rs.getTime("horaLlegada").toLocalTime());               
+                 
+                 hora.add(horario);
+            }
+            
+            ps.close();
+            
+        } catch (SQLException ex) {
+              JOptionPane.showMessageDialog(null, "Error al obtener todos los horarios " +ex);
+        }
+        
+        return hora;
+        
+    }
+    
+    
+    
+    
 
 }
+
+
+
