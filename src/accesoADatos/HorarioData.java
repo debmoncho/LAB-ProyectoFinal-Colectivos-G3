@@ -195,5 +195,53 @@ public class HorarioData {
         }
         return hora;
     }
+    
+    public List<Horario> obtenerHorariosInactivos() {
+
+    ArrayList<Horario> horariosInactivos = new ArrayList<>();
+
+    String sql = "SELECT * FROM horarios WHERE estado = 0";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Horario horario = new Horario();
+            horario.setIdHorario(rs.getInt("idHorario"));
+            Ruta ruta = rd.buscarRuta(rs.getInt("idRuta"));
+            horario.setRuta(ruta);
+            horario.setHoraSalida(rs.getTime("horaSalida").toLocalTime());
+            horario.setHoraLlegada(rs.getTime("horaLlegada").toLocalTime());
+            horario.setEstado(rs.getBoolean("estado"));
+            horariosInactivos.add(horario);
+        }
+
+        ps.close();
+
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al obtener horarios inactivos " + ex);
+    }
+
+    return horariosInactivos;
+}
+    public void activarHorario(int id) {
+    String sql = "UPDATE horarios SET estado=1 WHERE idHorario= ? AND estado=0";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, id);
+        int exito = ps.executeUpdate();
+
+        if (exito == 1) {
+            JOptionPane.showMessageDialog(null, "Horario activado");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudo activar el horario. Puede que ya esté activo o no exista.");
+        }
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al activar un horario: " + ex.getMessage());
+    }
+}
 
 }

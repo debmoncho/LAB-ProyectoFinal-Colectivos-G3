@@ -4,19 +4,54 @@
  */
 package Vistas;
 
+import Entidades.Ruta;
+import accesoADatos.RutaData;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Deb APBT
  */
 public class VentaDePasajes extends javax.swing.JInternalFrame {
+    
+    private RutaData rd;
+    private DefaultTableModel modelo;
+    private List<Ruta> listaR;
 
     /**
      * Creates new form VentaDePasajes
      */
     public VentaDePasajes() {
         initComponents();
+        
+        modelo = new DefaultTableModel();
+        rd= new RutaData();
+        listaR =rd.listarRuta();
+        cargarRutas();
+        
+        
+        
     }
 
+    public void cargarRutas(){
+
+
+    for(Ruta item : listaR) {
+        
+            comboRuta.addItem("hola");
+        }
+        
+    }
+     private void borrarFilasTabla(){
+    
+        int indice = modelo.getRowCount() - 1;
+        for(int i = indice; i >= 0; i--){
+        
+            modelo.removeRow(i);
+        }
+    }
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,7 +70,7 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comboRuta = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -103,7 +138,11 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboRuta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboRutaActionPerformed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Trebuchet MS", 2, 14)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -190,7 +229,7 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(comboRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
@@ -248,7 +287,7 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextField4)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox1))
+                    .addComponent(comboRuta))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -284,13 +323,20 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void comboRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboRutaActionPerformed
+        // TODO add your handling code here:
+    
+        
+ 
+    }//GEN-LAST:event_comboRutaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> comboRuta;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -99,11 +99,11 @@ public class LABProyectoFinalColectivosG3 {
 //            System.out.println("");
 //        }
 //------------------------------------------------------------------------------------------------
-//      Ruta ruta = new Ruta("Flores", "San Luis", LocalTime.of(0, 40),true);
+//      Ruta ruta = new Ruta("San Luis", "Merlo", LocalTime.of(4, 30),true);
 // 
 ////
 //       RutaData rd = new RutaData();
-//       
+////       
 //       for(Ruta ru : rd.listarRuta()){
 //           System.out.println("");
 //           System.out.println(ru.getIdRuta());
@@ -131,14 +131,29 @@ public class LABProyectoFinalColectivosG3 {
  // rd.eliminarRuta(4);
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 
+// PROBANDO HORARIOS
 //Horario horario=new Horario(1,ruta, LocalTime.now(), LocalTime.now(),true);
 //
 //Horario horario2=new Horario(2, ruta, LocalTime.MAX, LocalTime.MIN, true);
 
 //Horario horario3=new Horario(3, ruta, LocalTime.of(22,30), LocalTime.of(23,50), true);
-
+//
 // HorarioData hd=new HorarioData();
  
+// hd.eliminarHorario(1);
+
+//hd.guardarHorario(horario3);
+
+// for(Horario elemento:hd.obtenerHorariosInactivos()){
+//      System.out.println(" ");
+//    System.out.println(elemento.getIdHorario());
+//    System.out.println(elemento.getRuta());
+//    System.out.println(elemento.getHoraLlegada());
+//    System.out.println(elemento.getHoraSalida());
+//    System.out.println(elemento.isEstado());
+// }
+
+
 //hd.guardarHorario(horario3);
  
 //  hd.guardarHorario(horario2);
@@ -180,16 +195,16 @@ public class LABProyectoFinalColectivosG3 {
 //    System.out.println("Estado: " + elemento.isEstado());
 //}
 
-PasajeroData pd = new PasajeroData();
-    RutaData linia = new RutaData();
-    ColectivoData cole = new ColectivoData();
-    
-    PasajeData pl = new PasajeData();
-    
-    Pasajero alejandro= pd.buscarPasajero(1);
-    Ruta ruta = linia.buscarRuta(1);
-    Colectivo bus= cole.buscarColectivo(2);
-     
+//PasajeroData pd = new PasajeroData();
+//    RutaData linia = new RutaData();
+//    ColectivoData cole = new ColectivoData();
+//    
+//    PasajeData pl = new PasajeData();
+//    
+//    Pasajero alejandro= pd.buscarPasajero(1);
+//    Ruta ruta = linia.buscarRuta(1);
+//    Colectivo bus= cole.buscarColectivo(2);
+//     
 //    Pasaje pasaje = new Pasaje(alejandro,bus,ruta,LocalDate.of(2024, 3, 20),LocalTime.of(4, 23),1,19099);
 
  
@@ -249,17 +264,23 @@ PasajeroData pd = new PasajeroData();
 
 //OBTENER PASAJE POR HORARIO
 
-for(Pasaje pasaje:pl.obtenerPasajeVendidoPorHorario(LocalTime.of(4,20))){
-      System.out.println("");
-     System.out.println("id pasaje: "+pasaje.getIdPasaje() );
-     System.out.println(pasaje.getPasajero());
-     System.out.println(pasaje.getColectivo());
-     System.out.println(pasaje.getRuta());
-     System.out.println("fecha de viaje "+pasaje.getFechaViaje());
-     System.out.println("horario de viaje "+pasaje.getHoraViaje());
-     System.out.println("asiento "+pasaje.getAsiento());
-     System.out.println("precio "+pasaje.getPrecio());
-}
+//for(Pasaje pasaje:pl.obtenerPasajeVendidoPorHorario(LocalTime.of(4,20))){
+//      System.out.println("");
+//     System.out.println("id pasaje: "+pasaje.getIdPasaje() );
+//     System.out.println(pasaje.getPasajero());
+//     System.out.println(pasaje.getColectivo());
+//     System.out.println(pasaje.getRuta());
+//     System.out.println("fecha de viaje "+pasaje.getFechaViaje());
+//     System.out.println("horario de viaje "+pasaje.getHoraViaje());
+//     System.out.println("asiento "+pasaje.getAsiento());
+//     System.out.println("precio "+pasaje.getPrecio());
+//}
+
+  //PROBANDO VERIFICACION DEL PASAJE
+  
+  ColectivoData colectivo=new ColectivoData();
+  
+ 
 
  
 
