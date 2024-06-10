@@ -384,7 +384,11 @@
           <StringArray count="3">
             <StringItem index="0" value="1:00"/>
             <StringItem index="1" value="2:00"/>
+<<<<<<< Updated upstream
             <StringItem index="2" value="2:30"/>
+=======
+            <StringItem index="2" value="2:30:"/>
+>>>>>>> Stashed changes
           </StringArray>
         </Property>
       </Properties>

@@ -169,7 +169,11 @@ public class Rutas extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Duracion:");
 
+<<<<<<< Updated upstream
         jCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1:00", "2:00", "2:30" }));
+=======
+        jCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1:00", "2:00", "2:30:" }));
+>>>>>>> Stashed changes
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -349,7 +353,10 @@ private void cargarRutas(){
     List<Ruta> lista = rutadata.listarRuta();
     for (Ruta r : lista) {
         modelo.addRow(new Object[]{r.getOrigen(),r.getDestino(),r.getDuracionEstimada()});
+<<<<<<< Updated upstream
         System.out.println("hila");
+=======
+>>>>>>> Stashed changes
     }
 }
 }
