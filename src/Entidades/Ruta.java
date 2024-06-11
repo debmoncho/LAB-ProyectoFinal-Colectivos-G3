@@ -26,7 +26,6 @@ public class Ruta {
         this.origen = origen;
         this.destino = destino;
         this.duracionEstimada = duracionEstimada;
-        this.estado = estado; 
     }
 
     public int getIdRuta() {
