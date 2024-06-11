@@ -47,7 +47,8 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
         
         rutaData= new RutaData();
         listaR =rutaData.listarRuta();
-        //cargarRutas(); 
+        //cargarRutas();
+        llenarRutas();
         //cargarColectivos();
         
         modelo = new DefaultTableModel();
@@ -110,7 +111,7 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
         jdFecha = new com.toedter.calendar.JDateChooser();
         jLabel13 = new javax.swing.JLabel();
-        comboRuta = new javax.swing.JComboBox<>();
+        comboRuta = new javax.swing.JComboBox();
         comboHorario = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jbBuscar = new javax.swing.JButton();
@@ -493,7 +494,7 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<Integer> comboAsiento;
     private javax.swing.JComboBox<Colectivo> comboColectivo;
     private javax.swing.JComboBox<Horario> comboHorario;
-    private javax.swing.JComboBox<Ruta> comboRuta;
+    private javax.swing.JComboBox comboRuta;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
