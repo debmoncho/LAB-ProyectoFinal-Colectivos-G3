@@ -33,6 +33,10 @@ public class Pasajero {
         this.estado = estado;
     }
 
+    public Pasajero(String nombre, String apellido, String dni) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public int getIdPasajero() {
         return IdPasajero;
     }
