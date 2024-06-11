@@ -10,6 +10,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ButtonModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -42,6 +43,7 @@ public class Rutas extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jbSalir = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -154,6 +156,7 @@ public class Rutas extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonGroup1.add(jrOrigen);
         jrOrigen.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jrOrigen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jrOrigen.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -163,6 +166,7 @@ public class Rutas extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonGroup1.add(jrDestino);
         jrDestino.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jrDestino.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jrDestino.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -262,8 +266,7 @@ public class Rutas extends javax.swing.JInternalFrame {
                             .addComponent(jrDestino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -304,7 +307,11 @@ public class Rutas extends javax.swing.JInternalFrame {
 
     private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
         // TODO add your handling code here:
+
+        ButtonModel selection = buttonGroup1.getSelection();
+
         
+        int a = 2;
     }//GEN-LAST:event_jBuscarActionPerformed
 
     private void jrOrigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrOrigenActionPerformed
@@ -313,6 +320,7 @@ public class Rutas extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jBuscar;
     private javax.swing.JComboBox<String> jCombo;
     private javax.swing.JLabel jLabel1;
