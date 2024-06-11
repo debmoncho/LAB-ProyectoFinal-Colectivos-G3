@@ -121,8 +121,8 @@ public class RutaData {
             while(rs.next()){
             
                 Ruta ruta = new Ruta();
-                
-                ruta.setOrigen(rs.getString("idRuta"));
+                ruta.setIdRuta(rs.getInt("idRuta"));
+                ruta.setOrigen(rs.getString("origen"));
                 ruta.setDestino(rs.getString("destino"));
                 ruta.setDuracionEstimada(rs.getTime("duracionEstimada").toLocalTime());
                 ruta.setEstado(true);
