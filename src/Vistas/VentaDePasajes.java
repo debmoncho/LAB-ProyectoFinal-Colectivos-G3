@@ -1,4 +1,7 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
+ */
 package Vistas;
 
 import Entidades.*;
@@ -6,7 +9,6 @@ import accesoADatos.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -22,9 +24,6 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
     private List<Ruta> listaR;
     private List<Colectivo> listaC;
     
-    
-    private HorarioData horaData;
-    private ColectivoData colectivoData;
     private RutaData rutaData;
     private PasajeroData pasajeroData = new PasajeroData();
     private PasajeData pasajeData;
@@ -34,8 +33,6 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
     
     private DefaultTableModel modelo;
     private DefaultComboBoxModel jcomboRuta;
-    private DefaultComboBoxModel jcomboHora;
-    
     
 
     /**
@@ -50,14 +47,8 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
         
         rutaData= new RutaData();
         listaR =rutaData.listarRuta();
-        cargarRutas(); 
-        
-        colectivoData=new ColectivoData();
-        listaC=colectivoData.listarColectivos();
-          cargarColectivos();
-        
-        horaData=new HorarioData();
-        llenarHorario();
+        //cargarRutas(); 
+        //cargarColectivos();
         
         modelo = new DefaultTableModel();
     }
@@ -68,20 +59,6 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
      comboRuta.setModel(jcomboRuta);
     }
     
-    public void llenarHorario(){
-        List<Horario>listaHora=horaData.obtenerTodosLosHorarios();
-        List<String> infoHora = new ArrayList<>();
-        
-       for(Horario hora:listaHora){
-            String info = "Salida: " + hora.getHoraSalida().toString() + " - Llegada: " + hora.getHoraLlegada().toString();
-            infoHora.add(info);
-       }
-       
-       jcomboHora = new DefaultComboBoxModel(infoHora.toArray());
-        comboHorario.setModel(jcomboHora);
-       
-        
-    }
     
     public void cargarRutas(){
 
@@ -99,9 +76,6 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
         }
     }
      
-    
-    
-    
     
     private void borrarFilasTabla(){
     
@@ -443,7 +417,7 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-
+        // TODO add your handling code here:
         try {
             String dni = jtfDocumento.getText();
             String apellido = jtfApellido.getText();
@@ -459,7 +433,7 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
             
             Double precio = Double.parseDouble(jtfPrecio.getText());
             
-            if(nombre.isEmpty() || apellido.isEmpty()){
+            if(nombre.isEmpty() || apellido.isEmpty()){// eso esta mal
                 JOptionPane.showMessageDialog(this, "No puede haber campos vacios");
                 return;
             }
@@ -474,9 +448,7 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
         if(pasajeActual == null) {
             pasajeActual = new Pasaje(pasajero, colectivo, ruta, fechaViaje, horaViaje, asiento, precio);
             pasajeData.guardarPasaje(pasajeActual);
-            
         } else {
-            
             pasajeActual.setPasajero(pasajero);
             pasajeActual.setColectivo(colectivo);
             pasajeActual.setRuta(ruta);
@@ -487,19 +459,15 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
 
             //pasajeData.modificarPasaje(pasajeroActual);
             // NO tenemos el metodo de modificar pasaje. 1) creamos un metodo q tenga esto o 2) no lo modificamos y le enviamos un showMessage que cargue los datos correctamente.
-        
         }
         
         } catch(NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "No se pudo guardar el pasaje");
         }
-        
-        
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-
-        
+        // TODO add your handling code here:
         try {
             
              String dni = jtfDocumento.getText();
@@ -512,17 +480,12 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
                  jtfNombre.setText(pasajeroActual.getNombre());
                  jtfTelefono.setText(pasajeroActual.getTelefono());
                  jtfCorreo.setText(pasajeroActual.getCorreo());
-             }      
-             
+             }            
         } catch(NumberFormatException msj){
         
             JOptionPane.showMessageDialog(this, "Debe ingresar un DNI válido");
-        }
-        
-       
-        
     }//GEN-LAST:event_jbBuscarActionPerformed
-
+    }
 
         
         
