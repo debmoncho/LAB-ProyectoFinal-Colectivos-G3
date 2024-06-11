@@ -33,6 +33,7 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
     
     private DefaultTableModel modelo;
     private DefaultComboBoxModel jcomboRuta;
+    
 
     /**
      * Creates new form VentaDePasajes
@@ -46,7 +47,8 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
         
         rutaData= new RutaData();
         listaR =rutaData.listarRuta();
-        cargarRutas();  
+        cargarRutas(); 
+        cargarColectivos();
         
         modelo = new DefaultTableModel();
     }
@@ -108,8 +110,8 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
         jdFecha = new com.toedter.calendar.JDateChooser();
         jLabel13 = new javax.swing.JLabel();
-        comboRuta = new javax.swing.JComboBox();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        comboRuta = new javax.swing.JComboBox<>();
+        comboHorario = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jbBuscar = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -118,16 +120,16 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
         jtfPrecio = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jtfNombre = new javax.swing.JTextField();
-        comboColectivo = new javax.swing.JComboBox();
+        comboColectivo = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        comboAsiento = new javax.swing.JComboBox();
         jLabel11 = new javax.swing.JLabel();
         jtfApellido = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jtfTelefono = new javax.swing.JTextField();
         jtfCorreo = new javax.swing.JTextField();
+        comboAsiento = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setIconifiable(true);
@@ -205,8 +207,6 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("Fecha:");
         jLabel13.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Busqueda por DNI de Pasajero: ");
@@ -296,17 +296,17 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(10, 10, 10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(comboRuta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(comboAsiento, 0, 87, Short.MAX_VALUE))
+                    .addComponent(comboRuta, 0, 91, Short.MAX_VALUE)
+                    .addComponent(comboAsiento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox2, 0, 162, Short.MAX_VALUE)
+                    .addComponent(comboHorario, 0, 162, Short.MAX_VALUE)
                     .addComponent(jtfPrecio))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -384,16 +384,16 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(comboRuta)
-                                    .addComponent(jComboBox2)
+                                    .addComponent(comboHorario)
                                     .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(comboAsiento)
                                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(comboColectivo)
-                                    .addComponent(jtfPrecio)))
+                                    .addComponent(jtfPrecio)
+                                    .addComponent(comboAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -441,7 +441,7 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
         java.util.Date fecha = jdFecha.getDate();
         LocalDate fechaViaje = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();   
             
-        java.util.Date hora = jdFecha.getDate();
+        java.util.Date hora = jdFecha.getDate(); // esto esta mal.
         LocalTime horaViaje = hora.toInstant().atZone(ZoneId.systemDefault()).toLocalTime();
         
         
@@ -487,14 +487,16 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbBuscarActionPerformed
 
 
+        
+        
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox comboAsiento;
-    private javax.swing.JComboBox comboColectivo;
-    private javax.swing.JComboBox comboRuta;
+    private javax.swing.JComboBox<Integer> comboAsiento;
+    private javax.swing.JComboBox<Colectivo> comboColectivo;
+    private javax.swing.JComboBox<Horario> comboHorario;
+    private javax.swing.JComboBox<Ruta> comboRuta;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
