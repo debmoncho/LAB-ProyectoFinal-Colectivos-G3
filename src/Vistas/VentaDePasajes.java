@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
+
 package Vistas;
 
 import Entidades.*;
@@ -417,7 +414,7 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        // TODO add your handling code here:
+
         try {
             String dni = jtfDocumento.getText();
             String apellido = jtfApellido.getText();
@@ -448,7 +445,9 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
         if(pasajeActual == null) {
             pasajeActual = new Pasaje(pasajero, colectivo, ruta, fechaViaje, horaViaje, asiento, precio);
             pasajeData.guardarPasaje(pasajeActual);
+            
         } else {
+            
             pasajeActual.setPasajero(pasajero);
             pasajeActual.setColectivo(colectivo);
             pasajeActual.setRuta(ruta);
@@ -459,15 +458,19 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
 
             //pasajeData.modificarPasaje(pasajeroActual);
             // NO tenemos el metodo de modificar pasaje. 1) creamos un metodo q tenga esto o 2) no lo modificamos y le enviamos un showMessage que cargue los datos correctamente.
+        
         }
         
         } catch(NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "No se pudo guardar el pasaje");
         }
+        
+        
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        // TODO add your handling code here:
+
+        
         try {
             
              String dni = jtfDocumento.getText();
@@ -480,12 +483,17 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
                  jtfNombre.setText(pasajeroActual.getNombre());
                  jtfTelefono.setText(pasajeroActual.getTelefono());
                  jtfCorreo.setText(pasajeroActual.getCorreo());
-             }            
+             }      
+             
         } catch(NumberFormatException msj){
         
             JOptionPane.showMessageDialog(this, "Debe ingresar un DNI válido");
+        }
+        
+       
+        
     }//GEN-LAST:event_jbBuscarActionPerformed
-    }
+
 
         
         
