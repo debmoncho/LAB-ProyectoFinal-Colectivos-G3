@@ -9,6 +9,7 @@ import accesoADatos.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -24,6 +25,9 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
     private List<Ruta> listaR;
     private List<Colectivo> listaC;
     
+    
+    private ColectivoData coleData;
+     private HorarioData horaData;   
     private RutaData rutaData;
     private PasajeroData pasajeroData = new PasajeroData();
     private PasajeData pasajeData;
@@ -33,6 +37,8 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
     
     private DefaultTableModel modelo;
     private DefaultComboBoxModel jcomboRuta;
+    private DefaultComboBoxModel jcomboHora;
+    private DefaultComboBoxModel jcomboCole;
     
 
     /**
@@ -47,8 +53,13 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
         
         rutaData= new RutaData();
         listaR =rutaData.listarRuta();
-        //cargarRutas(); 
-        //cargarColectivos();
+         
+        cargarRutas(); 
+         coleData=new ColectivoData();
+        llenarColectivo();
+    
+        horaData=new HorarioData();
+        llenarHorario();
         
         modelo = new DefaultTableModel();
     }
@@ -68,14 +79,26 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
         }     
     }
     
-    private void cargarColectivos(){
-    
-        for(Colectivo item : listaC) {
+    public void llenarHorario(){
+        List<Horario>listaHora=horaData.obtenerTodosLosHorarios();
+        List<String> infoHora = new ArrayList<>();
         
-            comboColectivo.addItem(item);
-        }
+       for(Horario hora:listaHora){
+            String info = "Salida: " + hora.getHoraSalida().toString() + " - Llegada: " + hora.getHoraLlegada().toString();
+            infoHora.add(info);
+       }
+       
+       jcomboHora = new DefaultComboBoxModel(infoHora.toArray());
+        comboHorario.setModel(jcomboHora);           
     }
-     
+
+    public void llenarColectivo(){
+        List<Colectivo>listaCole=coleData.listarColectivos();
+        jcomboCole= new DefaultComboBoxModel(listaCole.toArray());
+        comboColectivo.setModel(jcomboCole);
+        
+    }
+    
     
     private void borrarFilasTabla(){
     
@@ -292,28 +315,30 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
             .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(77, 77, 77)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(comboRuta, 0, 91, Short.MAX_VALUE)
-                    .addComponent(comboAsiento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(comboAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE))
+                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(comboHorario, 0, 162, Short.MAX_VALUE)
+                    .addComponent(comboHorario, 0, 161, Short.MAX_VALUE)
                     .addComponent(jtfPrecio))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jdFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))
+                        .addComponent(jdFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -343,7 +368,7 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
                     .addComponent(jLabel15))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtfNombre)
+                    .addComponent(jtfNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                     .addComponent(jtfCorreo))
                 .addGap(73, 73, 73))
         );
@@ -440,8 +465,9 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
     
         java.util.Date fecha = jdFecha.getDate();
         LocalDate fechaViaje = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();   
-            
-        java.util.Date hora = jdFecha.getDate(); // esto esta mal.
+//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
+//        LocalTime localTime = LocalTime.parse(selectedTime, formatter);
+        LocalTime hora = 
         LocalTime horaViaje = hora.toInstant().atZone(ZoneId.systemDefault()).toLocalTime();
         
         
@@ -487,6 +513,8 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbBuscarActionPerformed
     }
 
+    
+    
         
         
     // Variables declaration - do not modify//GEN-BEGIN:variables
