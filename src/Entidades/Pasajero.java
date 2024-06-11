@@ -30,6 +30,7 @@ public class Pasajero {
         this.dni = dni;
         this.correo = correo;
         this.telefono = telefono;
+        this.estado = estado;
     }
 
     public int getIdPasajero() {
