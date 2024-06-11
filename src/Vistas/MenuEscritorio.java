@@ -43,6 +43,7 @@ public class MenuEscritorio extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jBuscarHorarios = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -81,7 +82,7 @@ public class MenuEscritorio extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem1);
 
-        jMenuItem2.setText("AgregarHorarios");
+        jMenuItem2.setText("Agregar Horarios");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -89,7 +90,7 @@ public class MenuEscritorio extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem2);
 
-        jBuscarHorarios.setText("BuscarHorarios");
+        jBuscarHorarios.setText("Buscar Horarios por Ruta");
         jBuscarHorarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBuscarHorariosActionPerformed(evt);
@@ -104,6 +105,14 @@ public class MenuEscritorio extends javax.swing.JFrame {
             }
         });
         jMenu5.add(jMenuItem3);
+
+        jMenuItem4.setText("Pasajes Vendidos");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem4);
 
         jMenuBar2.add(jMenu5);
 
@@ -214,6 +223,18 @@ public class MenuEscritorio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jBuscarHorariosActionPerformed
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        
+        escritorio.removeAll();
+        escritorio.repaint();
+        PasajesVendidos gestion = new PasajesVendidos();
+        gestion.setVisible(true);
+        escritorio.add(gestion);
+        escritorio.moveToFront(gestion);
+        
+        
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -258,6 +279,7 @@ public class MenuEscritorio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenu jMenuVentaDePasajes;
     // End of variables declaration//GEN-END:variables
 }
