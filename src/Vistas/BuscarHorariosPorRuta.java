@@ -8,6 +8,7 @@ import Entidades.Ruta;
 import accesoADatos.HorarioData;
 import accesoADatos.RutaData;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
@@ -23,7 +24,7 @@ public class BuscarHorariosPorRuta extends javax.swing.JInternalFrame {
     private  Horario horario;
    private List<Ruta> listaR;
    private DefaultComboBoxModel jcomboRuta ;
-   private DefaultTableModel tablaDec=new DefaultTableModel();
+   private DefaultTableModel tablaDec;
     
     
     /**
@@ -31,7 +32,10 @@ public class BuscarHorariosPorRuta extends javax.swing.JInternalFrame {
      */
     public BuscarHorariosPorRuta() {
         initComponents();
+         tablaDec=new DefaultTableModel();
         llenarRutas();
+        armarCabecera();
+        agregarHorarios();
         
     }
 
@@ -40,9 +44,7 @@ public class BuscarHorariosPorRuta extends javax.swing.JInternalFrame {
      jcomboRuta = new DefaultComboBoxModel(listaRuta.toArray()); 
      jRuta.setModel(jcomboRuta);
     }
-    
-    
-    
+  
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -151,15 +153,38 @@ public class BuscarHorariosPorRuta extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRutaActionPerformed
-        // TODO add your handling code here:
-        tablaDec.addRow(new Object[]{});
+
+      agregarHorarios();
         
     }//GEN-LAST:event_jRutaActionPerformed
 
+    private void agregarHorarios(){
+          Ruta ruta=(Ruta)jRuta.getSelectedItem();
+        List<Horario> lista = horarioD.obtenerHorarioPorRuta(ruta.getIdRuta());     
+        tablaDec.setRowCount(0);               
+        for (Horario r : lista) {
+        tablaDec.addRow(new Object[]{r.getHoraSalida(),r.getHoraLlegada(),r.isEstado()});
+        jTable.setModel(tablaDec);       
+    }
+    }
+    
+ 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+private void armarCabecera() {
+        ArrayList<Object> filaCabecera = new ArrayList<>();
+        filaCabecera.add("Salida");
+        filaCabecera.add("Llegada");
+        filaCabecera.add("estado ");
+        //filaCabecera.add("estado");
+        for (Object it : filaCabecera) {
+            tablaDec.addColumn(it);
+        }
+        jTable.setModel(tablaDec);
+    }
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
