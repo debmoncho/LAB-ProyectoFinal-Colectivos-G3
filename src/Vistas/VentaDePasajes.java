@@ -40,8 +40,7 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
     for(Ruta item : listaR) {
         
             comboRuta.addItem("hola");
-        }
-        
+        }     
     }
      private void borrarFilasTabla(){
     

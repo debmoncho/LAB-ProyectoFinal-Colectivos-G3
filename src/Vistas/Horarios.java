@@ -8,6 +8,11 @@ import Entidades.Horario;
 import Entidades.Ruta;
 import accesoADatos.HorarioData;
 import accesoADatos.RutaData;
+import java.sql.Time;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,7 +23,7 @@ public class Horarios extends javax.swing.JInternalFrame {
     private HorarioData horaD=new HorarioData();
     private RutaData rd=new RutaData();
    private  Horario horario=null;
-   private Ruta ruta=null;
+   private List<Ruta> listaR;
    
     
     /**
@@ -26,9 +31,18 @@ public class Horarios extends javax.swing.JInternalFrame {
      */
     public Horarios() {
         initComponents();
-        
+        rd= new RutaData();
+        listaR =rd.listarRuta();
+        cargarRutas();
         
     }
+    
+    public void cargarRutas(){
+    for(Ruta item : listaR) {     
+            comboRuta.addItem(item.getOrigen());
+        }     
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,12 +60,11 @@ public class Horarios extends javax.swing.JInternalFrame {
         comboRuta = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jSalida = new javax.swing.JLabel();
-        TextSalida = new javax.swing.JTextField();
+        textSalida = new javax.swing.JTextField();
         jLlegada = new javax.swing.JLabel();
-        TextLlegada = new javax.swing.JTextField();
+        textLlegada = new javax.swing.JTextField();
         Guardar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -78,8 +91,6 @@ public class Horarios extends javax.swing.JInternalFrame {
         jRuta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jRuta.setText("  Ruta");
 
-        comboRuta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jSalida.setText(" Horario de Salida");
 
         jLlegada.setText("Horario de LLegada");
@@ -92,13 +103,6 @@ public class Horarios extends javax.swing.JInternalFrame {
         });
 
         jLabel6.setText("                      Agregar Horarios");
-
-        jButton1.setText("Nuevo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -122,23 +126,18 @@ public class Horarios extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(comboRuta, 0, 259, Short.MAX_VALUE)
-                                    .addComponent(TextSalida)))
+                                    .addComponent(textSalida)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(Guardar)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jLlegada, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(43, 43, 43)
-                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLlegada, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(TextLlegada))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(111, 111, 111)
-                                        .addComponent(jButton1)
-                                        .addGap(0, 78, Short.MAX_VALUE)))))))
+                                        .addGap(43, 43, 43)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textLlegada))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(335, 335, 335)
+                        .addComponent(Guardar)))
                 .addContainerGap(125, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -155,39 +154,38 @@ public class Horarios extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jSalida)
-                    .addComponent(TextSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLlegada)
-                    .addComponent(TextLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Guardar)
-                    .addComponent(jButton1))
+                .addComponent(Guardar)
                 .addContainerGap(60, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
         // TODO add your handling code here:
-         
+      
+        
+        
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("HH:mm");
+//        LocalTime salida=LocalTime.parse(textSalida.getText(), formato);
+//        LocalTime llegada=LocalTime.parse(textLlegada.getText(), formato);
+        int ruta=(int)comboRuta.getSelectedItem();
+        JOptionPane.showMessageDialog(null, ruta);
+        
     }//GEN-LAST:event_GuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Guardar;
-    private javax.swing.JTextField TextLlegada;
-    private javax.swing.JTextField TextSalida;
     private javax.swing.JComboBox<String> comboRuta;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
@@ -196,5 +194,7 @@ public class Horarios extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jSalida;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField textLlegada;
+    private javax.swing.JTextField textSalida;
     // End of variables declaration//GEN-END:variables
 }
