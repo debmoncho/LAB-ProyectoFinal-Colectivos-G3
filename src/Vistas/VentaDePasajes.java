@@ -9,6 +9,7 @@ import accesoADatos.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -24,6 +25,9 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
     private List<Ruta> listaR;
     private List<Colectivo> listaC;
     
+    
+    private HorarioData horaData;
+    private ColectivoData colectivoData;
     private RutaData rutaData;
     private PasajeroData pasajeroData = new PasajeroData();
     private PasajeData pasajeData;
@@ -33,6 +37,8 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
     
     private DefaultTableModel modelo;
     private DefaultComboBoxModel jcomboRuta;
+    private DefaultComboBoxModel jcomboHora;
+    
     
 
     /**
@@ -48,7 +54,13 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
         rutaData= new RutaData();
         listaR =rutaData.listarRuta();
         cargarRutas(); 
-        cargarColectivos();
+        
+        colectivoData=new ColectivoData();
+        listaC=colectivoData.listarColectivos();
+          cargarColectivos();
+        
+        horaData=new HorarioData();
+        llenarHorario();
         
         modelo = new DefaultTableModel();
     }
@@ -59,6 +71,20 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
      comboRuta.setModel(jcomboRuta);
     }
     
+    public void llenarHorario(){
+        List<Horario>listaHora=horaData.obtenerTodosLosHorarios();
+        List<String> infoHora = new ArrayList<>();
+        
+       for(Horario hora:listaHora){
+            String info = "Salida: " + hora.getHoraSalida().toString() + " - Llegada: " + hora.getHoraLlegada().toString();
+            infoHora.add(info);
+       }
+       
+       jcomboHora = new DefaultComboBoxModel(infoHora.toArray());
+        comboHorario.setModel(jcomboHora);
+       
+        
+    }
     
     public void cargarRutas(){
 
@@ -76,6 +102,9 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
         }
     }
      
+    
+    
+    
     
     private void borrarFilasTabla(){
     

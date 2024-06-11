@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-06-2024 a las 17:03:02
+-- Tiempo de generación: 11-06-2024 a las 17:01:40
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `empresadecolectivos-g3`
 --
-CREATE DATABASE IF NOT EXISTS `empresadecolectivos-g3` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `empresadecolectivos-g3`;
 
 -- --------------------------------------------------------
 
@@ -69,9 +67,12 @@ CREATE TABLE `horarios` (
 --
 
 INSERT INTO `horarios` (`idHorario`, `idRuta`, `horaSalida`, `horaLlegada`, `estado`) VALUES
-(1, 2, '22:32:18', '22:32:18', 0),
+(1, 2, '22:32:00', '22:42:00', 0),
 (5, 3, '23:59:59', '00:00:00', 1),
-(7, 1, '22:30:00', '23:50:00', 1);
+(7, 1, '22:30:00', '23:50:00', 1),
+(11, 2, '21:40:00', '23:50:00', 0),
+(12, 3, '12:50:00', '23:20:00', 1),
+(13, 3, '15:00:00', '17:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -95,7 +96,8 @@ CREATE TABLE `pasajeros` (
 
 INSERT INTO `pasajeros` (`idPasajero`, `nombre`, `apellido`, `dni`, `correo`, `telefono`, `estado`) VALUES
 (1, 'Javier Alejandro', 'Pepon', '51489753', 'lala@gmail.com', '2665854796', 1),
-(3, 'Luis', 'Mercado', '12159741', 'lilo@gmail.com', '4459874', 0);
+(3, 'Luis', 'Mercado', '12159741', 'lilo@gmail.com', '4459874', 0),
+(4, 'Juan', 'Lopez', '43178350', 'correo1@gmail.com', '2664112233', 1);
 
 -- --------------------------------------------------------
 
@@ -113,6 +115,14 @@ CREATE TABLE `pasajes` (
   `asiento` int(11) NOT NULL,
   `precio` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `pasajes`
+--
+
+INSERT INTO `pasajes` (`idPasaje`, `idPasajero`, `idColectivo`, `idRuta`, `fechaViaje`, `horaViaje`, `asiento`, `precio`) VALUES
+(1, 1, 2, 1, '2024-03-25', '07:20:00', 1, 19099),
+(2, 4, 5, 3, '2024-06-08', '04:20:00', 17, 3);
 
 -- --------------------------------------------------------
 
@@ -134,7 +144,7 @@ CREATE TABLE `rutas` (
 
 INSERT INTO `rutas` (`idRuta`, `origen`, `destino`, `duracionEstimada`, `estado`) VALUES
 (1, 'San luis', 'Merlo', '04:25:00', 1),
-(2, 'San luis', 'Merlo', '04:30:00', 1),
+(2, 'San luis', 'Villa Mercedes', '04:30:00', 1),
 (3, 'San luis', 'Merlo', '04:25:00', 1);
 
 --
@@ -190,19 +200,19 @@ ALTER TABLE `colectivos`
 -- AUTO_INCREMENT de la tabla `horarios`
 --
 ALTER TABLE `horarios`
-  MODIFY `idHorario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idHorario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `pasajeros`
 --
 ALTER TABLE `pasajeros`
-  MODIFY `idPasajero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idPasajero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `pasajes`
 --
 ALTER TABLE `pasajes`
-  MODIFY `idPasaje` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPasaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `rutas`
