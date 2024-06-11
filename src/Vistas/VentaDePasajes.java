@@ -121,9 +121,13 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
         comboColectivo = new javax.swing.JComboBox();
         jLabel10 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        comboAsiento = new javax.swing.JComboBox<>();
+        comboAsiento = new javax.swing.JComboBox();
         jLabel11 = new javax.swing.JLabel();
         jtfApellido = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jtfTelefono = new javax.swing.JTextField();
+        jtfCorreo = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -257,6 +261,10 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
 
         jtfApellido.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
+        jLabel14.setText("Telefono:");
+
+        jLabel15.setText("Correo:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -315,21 +323,29 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
                 .addGap(36, 36, 36))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jbBuscar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jtfDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfApellido)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel8)
-                .addGap(18, 18, 18)
-                .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(110, 110, 110))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jtfApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                    .addComponent(jtfTelefono))
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel15))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtfNombre)
+                    .addComponent(jtfCorreo))
+                .addGap(73, 73, 73))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -345,11 +361,16 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
                     .addComponent(jtfDocumento, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jtfApellido)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel8)
                     .addComponent(jtfNombre))
-                .addGap(18, 18, 18)
-                .addComponent(jbBuscar)
                 .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbBuscar)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel15)
+                    .addComponent(jtfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jLabel9)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -401,8 +422,10 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
             String dni = jtfDocumento.getText();
             String apellido = jtfApellido.getText();
             String nombre = jtfNombre.getText();
-            
-            Pasajero pasajero = new Pasajero(nombre, apellido, dni); //falta telefono, correo y estado. como hacemos? 1.creamos un nuevo constructor o 2.le pasamos todos los datos en la vista
+            String telefono = jtfTelefono.getText();
+            String correo = jtfCorreo.getText();
+              
+            Pasajero pasajero = new Pasajero(nombre, apellido, dni, correo, telefono, true); //falta telefono, correo y estado. como hacemos? 1.creamos un nuevo constructor o 2.le pasamos todos los datos en la vista
             
             Colectivo colectivo = (Colectivo)comboColectivo.getSelectedItem();
             Ruta ruta = (Ruta)comboRuta.getSelectedItem();
@@ -454,7 +477,9 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
              if(pasajeroActual != null){
                  
                  jtfApellido.setText(pasajeroActual.getApellido());
-                 jtfNombre.setText(pasajeroActual.getNombre());      
+                 jtfNombre.setText(pasajeroActual.getNombre());
+                 jtfTelefono.setText(pasajeroActual.getTelefono());
+                 jtfCorreo.setText(pasajeroActual.getCorreo());
              }            
         } catch(NumberFormatException msj){
         
@@ -463,7 +488,7 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<Integer> comboAsiento;
+    private javax.swing.JComboBox comboAsiento;
     private javax.swing.JComboBox comboColectivo;
     private javax.swing.JComboBox comboRuta;
     private javax.swing.JButton jButton1;
@@ -475,6 +500,8 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -491,8 +518,10 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbGuardar;
     private com.toedter.calendar.JDateChooser jdFecha;
     private javax.swing.JTextField jtfApellido;
+    private javax.swing.JTextField jtfCorreo;
     private javax.swing.JTextField jtfDocumento;
     private javax.swing.JTextField jtfNombre;
     private javax.swing.JTextField jtfPrecio;
+    private javax.swing.JTextField jtfTelefono;
     // End of variables declaration//GEN-END:variables
 }
