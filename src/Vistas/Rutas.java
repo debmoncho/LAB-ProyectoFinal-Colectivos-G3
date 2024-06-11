@@ -357,6 +357,7 @@ private void cargarRutas(){
     List<Ruta> lista = rutadata.listarRuta();
     for (Ruta r : lista) {
         modelo.addRow(new Object[]{r.getOrigen(),r.getDestino(),r.getDuracionEstimada()});
+        System.out.println("");
     }
 }
 }
