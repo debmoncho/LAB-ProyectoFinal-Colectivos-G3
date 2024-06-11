@@ -47,8 +47,8 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
         
         rutaData= new RutaData();
         listaR =rutaData.listarRuta();
-        cargarRutas(); 
-        cargarColectivos();
+        //cargarRutas(); 
+        //cargarColectivos();
         
         modelo = new DefaultTableModel();
     }
@@ -433,7 +433,7 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
             
             Double precio = Double.parseDouble(jtfPrecio.getText());
             
-            if(nombre.isEmpty() || apellido.isEmpty()){
+            if(nombre.isEmpty() || apellido.isEmpty()){// eso esta mal
                 JOptionPane.showMessageDialog(this, "No puede haber campos vacios");
                 return;
             }
