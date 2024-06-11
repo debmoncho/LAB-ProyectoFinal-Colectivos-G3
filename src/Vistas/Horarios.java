@@ -11,7 +11,10 @@ import accesoADatos.RutaData;
 import java.sql.Time;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,27 +25,30 @@ public class Horarios extends javax.swing.JInternalFrame {
 
     private HorarioData horaD=new HorarioData();
     private RutaData rd=new RutaData();
-   private  Horario horario=null;
+   private  Horario horario;
    private List<Ruta> listaR;
+   private DefaultComboBoxModel jcomboRuta ;
    
     
     /**
      * Creates new form Horarios
      */
     public Horarios() {
-        initComponents();
-        rd= new RutaData();
-        listaR =rd.listarRuta();
-        cargarRutas();
-        
+        initComponents();      
+        llenarRutas();
     }
     
-    public void cargarRutas(){
-    for(Ruta item : listaR) {     
-            comboRuta.addItem(item.getOrigen());
-        }     
+
+    public void llenarRutas(){
+     List<Ruta> listaRuta = rd.listarRuta();
+     jcomboRuta = new DefaultComboBoxModel(listaRuta.toArray()); 
+     comboRuta.setModel(jcomboRuta);
     }
     
+    public void eliminar(){
+        textSalida.setText("");
+        textLlegada.setText("");       
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -170,16 +176,18 @@ public class Horarios extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
-        // TODO add your handling code here:
-      
-        
-        
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("HH:mm");
-//        LocalTime salida=LocalTime.parse(textSalida.getText(), formato);
-//        LocalTime llegada=LocalTime.parse(textLlegada.getText(), formato);
-        int ruta=(int)comboRuta.getSelectedItem();
-        JOptionPane.showMessageDialog(null, ruta);
-        
+        // TODO add your handling code here:    
+        try{
+              DateTimeFormatter formato = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime salida=LocalTime.parse(textSalida.getText(), formato);
+       LocalTime llegada=LocalTime.parse(textLlegada.getText(), formato);
+        Ruta ruta=(Ruta)comboRuta.getSelectedItem();
+        horario=new Horario(0, ruta, salida, llegada, true);
+        horaD.guardarHorario(horario);
+        }catch(DateTimeParseException e){          
+            JOptionPane.showMessageDialog(null, "Formato incorrecto utilize HH:mm");       
+        }    
+        eliminar();
     }//GEN-LAST:event_GuardarActionPerformed
 
 

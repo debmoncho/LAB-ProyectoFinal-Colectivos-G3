@@ -41,6 +41,7 @@ public class MenuEscritorio extends javax.swing.JFrame {
         jMenu5 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jBuscarHorarios = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
 
@@ -80,13 +81,21 @@ public class MenuEscritorio extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem1);
 
-        jMenuItem2.setText("Horarios");
+        jMenuItem2.setText("AgregarHorarios");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
             }
         });
         jMenu5.add(jMenuItem2);
+
+        jBuscarHorarios.setText("BuscarHorarios");
+        jBuscarHorarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBuscarHorariosActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jBuscarHorarios);
 
         jMenuItem3.setText("Rutas");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -194,6 +203,17 @@ public class MenuEscritorio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenu7MouseClicked
 
+    private void jBuscarHorariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarHorariosActionPerformed
+        // TODO add your handling code here:
+         escritorio.removeAll();
+        escritorio.repaint();
+        BuscarHorariosPorRuta gestion = new BuscarHorariosPorRuta();
+        gestion.setVisible(true);
+        escritorio.add(gestion);
+        escritorio.moveToFront(gestion);
+        
+    }//GEN-LAST:event_jBuscarHorariosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -231,6 +251,7 @@ public class MenuEscritorio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
+    private javax.swing.JMenuItem jBuscarHorarios;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar2;
