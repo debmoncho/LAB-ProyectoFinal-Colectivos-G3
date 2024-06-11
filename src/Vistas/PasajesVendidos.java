@@ -1,8 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
+
 package Vistas;
+
+import accesoADatos.PasajeData;
+import accesoADatos.RutaData;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import Entidades.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -10,11 +14,31 @@ package Vistas;
  */
 public class PasajesVendidos extends javax.swing.JInternalFrame {
 
+    private List<Ruta> rutaR;
+    private List<Pasaje> pasajeP;
+    
+    
+    private RutaData rutaData;
+    private PasajeData pasajData;
+    
+    private DefaultTableModel modelo;
+    
+    
     /**
      * Creates new form PasajesVendidos
      */
     public PasajesVendidos() {
         initComponents();
+        
+        rutaData = new RutaData();
+        pasajData = new PasajeData();
+        rutaR = rutaData.listarRuta();
+        
+        modelo = new DefaultTableModel();
+        
+        cargarRutas();
+        armarCabecera();
+        
     }
 
     /**
@@ -30,13 +54,13 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
         jLabel8 = new javax.swing.JLabel();
-        jRadioButton2 = new javax.swing.JRadioButton();
         jLabel11 = new javax.swing.JLabel();
-        jRadioButton3 = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTablaPV = new javax.swing.JTable();
+        jcbFiltrarPorRuta = new javax.swing.JComboBox();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox3 = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setIconifiable(true);
@@ -77,7 +101,7 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
         jLabel11.setText("Filtrar Por Pasajero");
         jLabel11.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTablaPV.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -95,7 +119,20 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTablaPV);
+
+        jcbFiltrarPorRuta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jcbFiltrarPorRuta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbFiltrarPorRutaActionPerformed(evt);
+            }
+        });
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,18 +150,18 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton1)
+                        .addComponent(jcbFiltrarPorRuta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                        .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton3)
-                        .addGap(28, 28, 28))
+                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(23, 23, 23))
                     .addComponent(jScrollPane1))
                 .addContainerGap())
         );
@@ -142,9 +179,9 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3))
+                    .addComponent(jcbFiltrarPorRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
@@ -158,18 +195,71 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    
+    private void borrarFilasTabla() {
+
+        int indice = modelo.getRowCount() - 1;
+        for (int i = indice; i >= 0; i--) {
+
+            modelo.removeRow(i);
+        }
+    }
+    
+    private void cargarRutas() {
+
+        for (Ruta item : rutaR) {
+
+            jcbFiltrarPorRuta.addItem(item);
+        }
+    }
+    
+    private void armarCabecera() {
+
+        ArrayList<Object> filaCabecera = new ArrayList<>();
+        filaCabecera.add("Id");
+        filaCabecera.add("Ruta");
+        filaCabecera.add("Fecha de Viaje");
+        filaCabecera.add("Hora de Viaje");
+
+        for (Object it : filaCabecera) {
+
+            modelo.addColumn(it);
+        }
+        
+        jTablaPV.setModel(modelo);
+    }
+    
+    private void cargaDatosPorRuta() {
+
+        Ruta select = (Ruta) jcbFiltrarPorRuta.getSelectedItem();
+        List<Pasaje> lista = pasajData.obtenerPasajeVendidoPorRuta(select.getIdRuta());
+
+        for (Pasaje a : lista) {
+
+            modelo.addRow(new Object[]{a.getIdPasaje(), a.getRuta(), a.getFechaViaje(), a.getHoraViaje()});
+        }
+    }
+    
+    
+    private void jcbFiltrarPorRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbFiltrarPorRutaActionPerformed
+        
+        borrarFilasTabla();
+        cargaDatosPorRuta();
+        
+    }//GEN-LAST:event_jcbFiltrarPorRutaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTablaPV;
+    private javax.swing.JComboBox jcbFiltrarPorRuta;
     // End of variables declaration//GEN-END:variables
 }
