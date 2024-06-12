@@ -234,6 +234,10 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
         filaCabecera.add("Ruta");
         filaCabecera.add("Fecha de Viaje");
         filaCabecera.add("Hora de Viaje");
+        filaCabecera.add("Asiento");
+        filaCabecera.add("Colectivo");
+        filaCabecera.add("Pasajero");
+        filaCabecera.add("Precio");
 
         for (Object it : filaCabecera) {
 
@@ -253,17 +257,25 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
     }
     
     private void cargaDatosPorRuta() {
+        
+        try {
+            
+            Ruta select = (Ruta) jcbFiltrarPorRuta.getSelectedItem();
+            List<Pasaje> lista = pasajData.obtenerPasajeVendidoPorRuta(select.getIdRuta());
 
-        Ruta select = (Ruta) jcbFiltrarPorRuta.getSelectedItem();
-        List<Pasaje> lista = pasajData.obtenerPasajeVendidoPorRuta(select.getIdRuta());
+            for (Pasaje a : lista) {
 
-        for (Pasaje a : lista) {
+                modelo.addRow(new Object[]{a.getIdPasaje(), a.getRuta(), a.getFechaViaje(), a.getHoraViaje(), a.getAsiento(), a.getColectivo(), a.getPasajero(), a.getPrecio()});
 
-            modelo.addRow(new Object[]{a.getIdPasaje(), a.getRuta(), a.getFechaViaje(), a.getHoraViaje()});
+            }
             
             
+        } catch (Exception e) {
+            
+            e.printStackTrace();
         }
-        modelo.fireTableDataChanged();
+        
+       
         
     }
     

@@ -2,12 +2,17 @@ package Vistas;
 
 import Entidades.*;
 import accesoADatos.*;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+<<<<<<< Updated upstream
 import java.util.Date;
+=======
+import java.util.Calendar;
+>>>>>>> Stashed changes
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -440,7 +445,8 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        // TODO add your handling code here:
+
+        
         try {
             String dni = jtfDocumento.getText();
             String apellido = jtfApellido.getText();
@@ -470,6 +476,7 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
             return;
         }
         
+<<<<<<< Updated upstream
         LocalDate fechaViaje = fechaDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         
          String selected = (String) comboHorario.getSelectedItem();
@@ -498,10 +505,23 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
             }
 
         } catch (NumberFormatException ex) {
+=======
+
+        
+        } catch(NumberFormatException ex) {
+>>>>>>> Stashed changes
             JOptionPane.showMessageDialog(this, "No se pudo guardar el pasaje");
         }
+        
+
+        
     }//GEN-LAST:event_jbGuardarActionPerformed
 
+    
+    
+    
+    
+    
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         // TODO add your handling code here:
         try {
