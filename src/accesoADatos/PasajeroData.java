@@ -222,5 +222,36 @@ public class PasajeroData {
         return pasajeros;
     }
     
+    public ArrayList<Pasajero> buscarPasajerosCl(String Pclave){
+        
+         ArrayList<Pasajero>pasajeros=new ArrayList();
+        try {
+           PreparedStatement ps = con.prepareStatement("SELECT * FROM pasajeros WHERE dni LIKE ?");
+           ps.setString(1, Pclave + "%");
+            
+           ResultSet rs = ps.executeQuery();
+           
+           while(rs.next()){
+               Pasajero p = new Pasajero(); 
+               p.setIdPasajero(rs.getInt("idPasajero"));
+               p.setNombre(rs.getString("nombre"));
+               p.setApellido(rs.getString("apellido"));
+               p.setDni(rs.getString("dni"));
+               p.setCorreo(rs.getString("correo"));
+               p.setTelefono(rs.getString("telefono"));
+               p.setEstado(rs.getBoolean("estado"));
+               pasajeros.add(p);
+               
+           }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error en buscar pasajeros");
+        }
+        
+        
+        return pasajeros;
+        
+    }
+    
     
 }

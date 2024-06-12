@@ -45,6 +45,8 @@ public class MenuEscritorio extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
+        jVenta = new javax.swing.JMenu();
+        jPasaje = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -128,6 +130,18 @@ public class MenuEscritorio extends javax.swing.JFrame {
             }
         });
         jMenuBar2.add(jMenu7);
+
+        jVenta.setText("Ventas");
+
+        jPasaje.setText("Comprar Pasaje");
+        jPasaje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasajeActionPerformed(evt);
+            }
+        });
+        jVenta.add(jPasaje);
+
+        jMenuBar2.add(jVenta);
 
         setJMenuBar(jMenuBar2);
 
@@ -235,6 +249,17 @@ public class MenuEscritorio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void jPasajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasajeActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        Ventas gestion = new Ventas();
+        gestion.setVisible(true);
+        escritorio.add(gestion);
+        escritorio.moveToFront(gestion);
+        
+    }//GEN-LAST:event_jPasajeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -281,5 +306,7 @@ public class MenuEscritorio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenu jMenuVentaDePasajes;
+    private javax.swing.JMenuItem jPasaje;
+    private javax.swing.JMenu jVenta;
     // End of variables declaration//GEN-END:variables
 }

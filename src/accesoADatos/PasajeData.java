@@ -411,4 +411,48 @@ public class PasajeData {
     }
 }
         
+        public List<Pasaje> obtenerPasajesCompradosPorColectivo(int idColectivo) {
+
+    ArrayList<Pasaje> vendidos = new ArrayList<>();
+
+    String sql = "SELECT * FROM pasajes WHERE idColectivo = ?";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        ps.setInt(1, idColectivo);
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+
+            Pasaje pasaje = new Pasaje();
+
+            pasaje.setIdPasaje(rs.getInt("idPasaje"));
+
+            Pasajero pedro = pd.buscarPasajero(rs.getInt("idPasajero"));
+            Ruta cordoba = rd.buscarRuta(rs.getInt("idRuta"));
+            Colectivo scania = cd.buscarColectivo(rs.getInt("idColectivo"));
+
+            pasaje.setPasajero(pedro);
+            pasaje.setRuta(cordoba);
+            pasaje.setColectivo(scania);
+            
+            pasaje.setFechaViaje(rs.getDate("fechaViaje").toLocalDate());
+            pasaje.setHoraViaje(rs.getTime("horaViaje").toLocalTime());
+            pasaje.setAsiento(rs.getInt("asiento"));
+            pasaje.setPrecio(rs.getDouble("precio"));
+
+            vendidos.add(pasaje);
+        }
+        ps.close();
+
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "No se ha podido obtener la lista de pasajes comprados por colectivo");
+    }
+
+    return vendidos;
+}
+        
+        
 }
