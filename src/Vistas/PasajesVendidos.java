@@ -233,7 +233,7 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
     private void armarCabecera() {
 
         ArrayList<Object> filaCabecera = new ArrayList<>();
-        filaCabecera.add("Id");
+        filaCabecera.add("Id Pasaje");
         filaCabecera.add("Ruta");
         filaCabecera.add("Fecha de Viaje");
         filaCabecera.add("Hora de Viaje");
