@@ -75,6 +75,7 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
         jcbFiltrarPorRuta = new javax.swing.JComboBox();
         JCBFiltrarPorHorario = new javax.swing.JComboBox();
         JCBFiltrarPorPasajero = new javax.swing.JComboBox();
+        jbAnularVenta = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -118,6 +119,9 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
         jTablaPV.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
@@ -155,6 +159,16 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
             }
         });
 
+        jbAnularVenta.setBackground(new java.awt.Color(255, 0, 51));
+        jbAnularVenta.setText("Anular Venta de Pasaje Emitido");
+        jbAnularVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jbAnularVenta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbAnularVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAnularVentaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -181,6 +195,10 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
                             .addComponent(JCBFiltrarPorPasajero, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jcbFiltrarPorRuta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(233, 233, 233)
+                .addComponent(jbAnularVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,8 +222,10 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
                     .addComponent(jLabel11)
                     .addComponent(JCBFiltrarPorPasajero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(268, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(jbAnularVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         pack();
@@ -357,6 +377,19 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_JCBFiltrarPorPasajeroActionPerformed
 
+    private void jbAnularVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAnularVentaActionPerformed
+        // TODO add your handling code here:
+        int filaSeleccionada = jTablaPV.getSelectedRow();
+        
+        if(filaSeleccionada != -1){
+            Alumno a = (Alumno)cboxAlumno.getSelectedItem();
+            int idMateria = (Integer)modelo.getValueAt(filaSeleccionada, 0);
+            inscData.borrarInscripcion(a.getIdAlumno(), idMateria);
+            borrarFilasTabla();
+            
+        }
+    }//GEN-LAST:event_jbAnularVentaActionPerformed
+
 
     
     
@@ -371,6 +404,7 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablaPV;
+    private javax.swing.JButton jbAnularVenta;
     private javax.swing.JComboBox jcbFiltrarPorRuta;
     // End of variables declaration//GEN-END:variables
 }
