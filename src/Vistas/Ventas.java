@@ -499,7 +499,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         Pasaje pasaje=new Pasaje(0, pasajero, colectivo, ruta, lc, horaViaje, asiento, precio);
 //        JOptionPane.showMessageDialog(null, info);
             pasajeD.guardarPasaje(pasaje);
-            jtaRecibo.setText(pasaje.mensajeRecibo());
+            jtaRecibo.setText(pasaje.mensajeRecibo());  
     }//GEN-LAST:event_jGuardarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
