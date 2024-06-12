@@ -26,3 +26,4 @@ replay_pid*
 /build/
 nbproject/private/private.properties
 nbproject/private/private.properties
+/dist/
