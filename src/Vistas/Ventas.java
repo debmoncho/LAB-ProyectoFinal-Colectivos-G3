@@ -367,6 +367,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         Colectivo colectivo = (Colectivo) jComboColectivo.getSelectedItem();
         int asiento = (int) jComboAsiento.getSelectedItem();
         String pre = jtPrecio.getText();
+        //Agregue jtexfeil para el precio que faltaba
         double precio = (double) Double.parseDouble(pre);
         Pasaje pasaje=new Pasaje(0, pasajero, colectivo, ruta, lc, horaViaje, asiento, precio);
 //        JOptionPane.showMessageDialog(null, info);
