@@ -7,8 +7,8 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import Entidades.*;
 import accesoADatos.HorarioData;
+import accesoADatos.PasajeroData;
 import java.util.ArrayList;
-import jdk.internal.org.jline.utils.InfoCmp;
 
 /**
  *
@@ -19,11 +19,13 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
     private List<Ruta> rutaR;
     private List<Pasaje> pasajeP;
     private List<Horario> horarioH;
+    private List<Pasajero> pasajeroP;
     
     
     private RutaData rutaData;
     private PasajeData pasajData;
     private HorarioData horarioD;
+    private PasajeroData pasajeroDT;
     
     private DefaultTableModel modelo;
     
@@ -37,15 +39,19 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
         rutaData = new RutaData();
         pasajData = new PasajeData();
         rutaR = rutaData.listarRuta();
-        horarioD = new HorarioData();
         
+        horarioD = new HorarioData();
         horarioH = horarioD.obtenerTodosLosHorarios();
+        
+        pasajeroDT = new PasajeroData();
+        pasajeroP = pasajeroDT.listarPasajero();
         
         modelo = new DefaultTableModel();
         
-        cargarRutas();
         armarCabecera();
+        cargarRutas();
         cargarHorarios();
+        cargarPasajeros();
         
     }
 
@@ -68,7 +74,7 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
         jTablaPV = new javax.swing.JTable();
         jcbFiltrarPorRuta = new javax.swing.JComboBox();
         JCBFiltrarPorHorario = new javax.swing.JComboBox();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        JCBFiltrarPorPasajero = new javax.swing.JComboBox();
 
         setClosable(true);
         setIconifiable(true);
@@ -112,15 +118,6 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
         jTablaPV.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
@@ -151,8 +148,12 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
             }
         });
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        JCBFiltrarPorPasajero.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        JCBFiltrarPorPasajero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JCBFiltrarPorPasajeroActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -160,7 +161,7 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(189, 189, 189)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE)
                 .addGap(111, 111, 111)
                 .addComponent(jButton1)
                 .addGap(62, 62, 62))
@@ -168,21 +169,17 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcbFiltrarPorRuta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JCBFiltrarPorHorario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(23, 23, 23))
-                    .addComponent(jScrollPane1))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(145, 145, 145)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(JCBFiltrarPorHorario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(JCBFiltrarPorPasajero, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jcbFiltrarPorRuta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -192,24 +189,30 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jLabel1))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jcbFiltrarPorRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(jcbFiltrarPorRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(JCBFiltrarPorHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
+                    .addComponent(jLabel8))
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11)
+                    .addComponent(JCBFiltrarPorPasajero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    ////////////////////////////////////////////////////////
+    
     //BOTON SALIR
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
@@ -234,6 +237,10 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
         filaCabecera.add("Ruta");
         filaCabecera.add("Fecha de Viaje");
         filaCabecera.add("Hora de Viaje");
+        filaCabecera.add("Asiento");
+        filaCabecera.add("Colectivo");
+        filaCabecera.add("Pasajero");
+        filaCabecera.add("Precio");
 
         for (Object it : filaCabecera) {
 
@@ -242,6 +249,10 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
         
         jTablaPV.setModel(modelo);
     }
+    
+    ////////////////////////////////////////////////////////
+    
+    
     
     // CARGAR RUTAS EN COMBO BOX
     private void cargarRutas() {
@@ -253,19 +264,36 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
     }
     
     private void cargaDatosPorRuta() {
+        
+        try {
+            
+            Ruta select = (Ruta) jcbFiltrarPorRuta.getSelectedItem();
+            List<Pasaje> lista = pasajData.obtenerPasajeVendidoPorRuta(select.getIdRuta());
 
-        Ruta select = (Ruta) jcbFiltrarPorRuta.getSelectedItem();
-        List<Pasaje> lista = pasajData.obtenerPasajeVendidoPorRuta(select.getIdRuta());
+            for (Pasaje a : lista) {
 
-        for (Pasaje a : lista) {
+                modelo.addRow(new Object[]{a.getIdPasaje(), a.getRuta(), a.getFechaViaje(), a.getHoraViaje(), a.getAsiento(), a.getColectivo(), a.getPasajero(), a.getPrecio()});
 
-            modelo.addRow(new Object[]{a.getIdPasaje(), a.getRuta(), a.getFechaViaje(), a.getHoraViaje()});
+            }
             
             
+        } catch (Exception e) {
+            
+            e.printStackTrace();
         }
-        modelo.fireTableDataChanged();
+        
+       
         
     }
+    
+    
+    private void jcbFiltrarPorRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbFiltrarPorRutaActionPerformed
+        
+        borrarFilasTabla();
+        cargaDatosPorRuta();
+        
+    }//GEN-LAST:event_jcbFiltrarPorRutaActionPerformed
+
     
     // CARGAR HORARIOS EN COMBO BOX
     private void cargarHorarios() {
@@ -283,19 +311,12 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
 
         for (Pasaje b : lista) {
 
-            modelo.addRow(new Object[]{b.getIdPasaje()});
+            modelo.addRow(new Object[]{b.getIdPasaje(), b.getRuta(), b.getFechaViaje(), b.getHoraViaje(), b.getAsiento(), b.getColectivo(), b.getPasajero(), b.getPrecio()});
         }
         modelo.fireTableDataChanged();
     }
     
     
-    private void jcbFiltrarPorRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbFiltrarPorRutaActionPerformed
-        
-        borrarFilasTabla();
-        cargaDatosPorRuta();
-        
-    }//GEN-LAST:event_jcbFiltrarPorRutaActionPerformed
-
     private void JCBFiltrarPorHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBFiltrarPorHorarioActionPerformed
         
         borrarFilasTabla();
@@ -303,11 +324,46 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_JCBFiltrarPorHorarioActionPerformed
 
+    
+    
+    // CARGAR PASAJEROS EN COMBO BOX
+    private void cargarPasajeros() {
 
+        for (Pasajero item : pasajeroP) {
+
+            JCBFiltrarPorPasajero.addItem(item);
+        }
+    }
+    
+
+    private void cargaDatosPorPasajero() {
+
+        Pasajero select = (Pasajero) JCBFiltrarPorPasajero.getSelectedItem();
+        List<Pasaje> lista = pasajData.obtenerPasajeVendidoPorPasajero(select.getIdPasajero());
+
+        for (Pasaje c : lista) {
+
+            modelo.addRow(new Object[]{c.getIdPasaje(), c.getRuta(), c.getFechaViaje(), c.getHoraViaje(), c.getAsiento(), c.getColectivo(), c.getPasajero(), c.getPrecio()});
+        }
+        
+        modelo.fireTableDataChanged();
+    }
+    
+    
+    private void JCBFiltrarPorPasajeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBFiltrarPorPasajeroActionPerformed
+       
+        borrarFilasTabla();
+        cargaDatosPorPasajero();
+        
+    }//GEN-LAST:event_JCBFiltrarPorPasajeroActionPerformed
+
+
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox JCBFiltrarPorHorario;
+    private javax.swing.JComboBox JCBFiltrarPorPasajero;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
