@@ -64,9 +64,9 @@ public class PasajeData {
     }
      
     
-    public void borrarPasaje(int idPasajero, int idRuta){
+    public void borrarPasaje(int idPasajero, int idRuta, int idColectivo){
         
-        String sql = "DELETE FROM pasajes WHERE idPasajero = ? AND idRuta = ?";
+        String sql = "DELETE FROM pasajes WHERE idPasajero = ? AND idRuta = ? AND idColectivo = ?";
         
         try {
         
@@ -74,6 +74,7 @@ public class PasajeData {
             
             ps.setInt(1, idPasajero);
             ps.setInt(2, idRuta);
+            ps.setInt(3, idColectivo);
             
             int exito = ps.executeUpdate();
             
