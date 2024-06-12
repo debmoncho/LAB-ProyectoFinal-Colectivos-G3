@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
 package Vistas;
 
 import Entidades.*;
@@ -9,7 +5,9 @@ import accesoADatos.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -20,95 +18,93 @@ import javax.swing.table.DefaultTableModel;
  * @author Deb APBT
  */
 public class VentaDePasajes extends javax.swing.JInternalFrame {
-    
+
     private List<Pasajero> listaP;
     private List<Ruta> listaR;
     private List<Colectivo> listaC;
-    
-    
+
     private ColectivoData coleData;
-     private HorarioData horaData;   
+    private HorarioData horaData;
     private RutaData rutaData;
     private PasajeroData pasajeroData = new PasajeroData();
     private PasajeData pasajeData;
     private Pasaje pasajeActual = null;
-    
+
     private Pasajero pasajeroActual = null;
-    
+
     private DefaultTableModel modelo;
     private DefaultComboBoxModel jcomboRuta;
     private DefaultComboBoxModel jcomboHora;
     private DefaultComboBoxModel jcomboCole;
-    
 
     /**
      * Creates new form VentaDePasajes
      */
     public VentaDePasajes() {
-        
+
         initComponents();
-        
+
         pasajeroData = new PasajeroData();
         listaP = pasajeroData.listarPasajero();
-        
-        rutaData= new RutaData();
-        listaR =rutaData.listarRuta();
-         
-        cargarRutas(); 
-         coleData=new ColectivoData();
+
+        rutaData = new RutaData();
+        listaR = rutaData.listarRuta();
+
+        cargarRutas();
+        coleData = new ColectivoData();
         llenarColectivo();
-    
-        horaData=new HorarioData();
+
+        horaData = new HorarioData();
         llenarHorario();
         
+        pasajeData=new PasajeData();
+
         modelo = new DefaultTableModel();
     }
 
-    public void llenarRutas(){
-     List<Ruta> listaRuta = rutaData.listarRuta();
-     jcomboRuta = new DefaultComboBoxModel(listaRuta.toArray()); 
-     comboRuta.setModel(jcomboRuta);
+    public void llenarRutas() {
+        List<Ruta> listaRuta = rutaData.listarRuta();
+        jcomboRuta = new DefaultComboBoxModel(listaRuta.toArray());
+        comboRuta.setModel(jcomboRuta);
     }
-    
-    
-    public void cargarRutas(){
 
-    for(Ruta item : listaR) {
-        
+    public void cargarRutas() {
+
+        for (Ruta item : listaR) {
+
             comboRuta.addItem(item);
-        }     
-    }
-    
-    public void llenarHorario(){
-        List<Horario>listaHora=horaData.obtenerTodosLosHorarios();
-        List<String> infoHora = new ArrayList<>();
-        
-       for(Horario hora:listaHora){
-            String info = "Salida: " + hora.getHoraSalida().toString() + " - Llegada: " + hora.getHoraLlegada().toString();
-            infoHora.add(info);
-       }
-       
-       jcomboHora = new DefaultComboBoxModel(infoHora.toArray());
-        comboHorario.setModel(jcomboHora);           
+        }
     }
 
-    public void llenarColectivo(){
-        List<Colectivo>listaCole=coleData.listarColectivos();
-        jcomboCole= new DefaultComboBoxModel(listaCole.toArray());
-        comboColectivo.setModel(jcomboCole);
-        
+    public void llenarHorario() {
+        List<Horario> listaHora = horaData.obtenerTodosLosHorarios();
+        List<String> infoHora = new ArrayList<>();
+
+        for (Horario hora : listaHora) {
+            String info =hora.getHoraSalida().toString();
+            infoHora.add(info);
+        }
+
+        jcomboHora = new DefaultComboBoxModel(infoHora.toArray());
+        comboHorario.setModel(jcomboHora);
     }
-    
-    
-    private void borrarFilasTabla(){
-    
+
+    public void llenarColectivo() {
+        List<Colectivo> listaCole = coleData.listarColectivos();
+        jcomboCole = new DefaultComboBoxModel(listaCole.toArray());
+        comboColectivo.setModel(jcomboCole);
+
+    }
+
+    private void borrarFilasTabla() {
+
         int indice = modelo.getRowCount() - 1;
-        for(int i = indice; i >= 0; i--){
-        
+        for (int i = indice; i >= 0; i--) {
+
             modelo.removeRow(i);
         }
     }
- 
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -152,7 +148,7 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
         jLabel15 = new javax.swing.JLabel();
         jtfTelefono = new javax.swing.JTextField();
         jtfCorreo = new javax.swing.JTextField();
-        comboAsiento = new javax.swing.JComboBox<>();
+        comboAsiento = new javax.swing.JComboBox();
 
         setClosable(true);
         setIconifiable(true);
@@ -287,6 +283,8 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
         jLabel14.setText("Telefono:");
 
         jLabel15.setText("Correo:");
+
+        comboAsiento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -449,45 +447,57 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
             String nombre = jtfNombre.getText();
             String telefono = jtfTelefono.getText();
             String correo = jtfCorreo.getText();
-              
-            Pasajero pasajero = new Pasajero(nombre, apellido, dni, correo, telefono, true); //falta telefono, correo y estado. como hacemos? 1.creamos un nuevo constructor o 2.le pasamos todos los datos en la vista
             
-            Colectivo colectivo = (Colectivo)comboColectivo.getSelectedItem();
-            Ruta ruta = (Ruta)comboRuta.getSelectedItem();
-            int asiento = (int)comboAsiento.getSelectedItem();
+             if (nombre.isEmpty() || apellido.isEmpty() || dni.isEmpty() || telefono.isEmpty() || correo.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No puede haber campos vacios");
+            return;
+           }
             
-            Double precio = Double.parseDouble(jtfPrecio.getText());
-            
-            if(nombre.isEmpty() || apellido.isEmpty()){// eso esta mal
-                JOptionPane.showMessageDialog(this, "No puede haber campos vacios");
-                return;
-            }
-    
-        java.util.Date fecha = jdFecha.getDate();
-        LocalDate fechaViaje = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();   
-//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
-//        LocalTime localTime = LocalTime.parse(selectedTime, formatter);
-        LocalTime hora = 
-        LocalTime horaViaje = hora.toInstant().atZone(ZoneId.systemDefault()).toLocalTime();
-        
-        
-        if(pasajeActual == null) {
-            pasajeActual = new Pasaje(pasajero, colectivo, ruta, fechaViaje, horaViaje, asiento, precio);
-            pasajeData.guardarPasaje(pasajeActual);
-        } else {
-            pasajeActual.setPasajero(pasajero);
-            pasajeActual.setColectivo(colectivo);
-            pasajeActual.setRuta(ruta);
-            pasajeActual.setFechaViaje(fechaViaje);
-            pasajeActual.setHoraViaje(horaViaje);
-            pasajeActual.setAsiento(asiento);
-            pasajeActual.setPrecio(precio);
 
-            //pasajeData.modificarPasaje(pasajeroActual);
-            // NO tenemos el metodo de modificar pasaje. 1) creamos un metodo q tenga esto o 2) no lo modificamos y le enviamos un showMessage que cargue los datos correctamente.
+            Pasajero pasajero = new Pasajero(nombre, apellido, dni, correo, telefono, true); //falta telefono, correo y estado. como hacemos? 1.creamos un nuevo constructor o 2.le pasamos todos los datos en la vista
+
+            Colectivo colectivo = (Colectivo) comboColectivo.getSelectedItem();
+            Ruta ruta = (Ruta) comboRuta.getSelectedItem();
+           String item = (String) comboAsiento.getSelectedItem();
+            int asiento = Integer.parseInt(item);
+
+            Double precio = Double.valueOf(jtfPrecio.getText());
+
+            Date fechaDate=jdFecha.getDate();
+                  
+        if (fechaDate == null) {
+            JOptionPane.showMessageDialog(this, "Seleccione una fecha válida");
+            return;
         }
         
-        } catch(NumberFormatException ex) {
+        LocalDate fechaViaje = fechaDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        
+         String selected = (String) comboHorario.getSelectedItem();
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
+//        LocalTime horaViaje = LocalTime.parse(selected, formatter);
+    LocalTime horaViaje=LocalTime.parse(selected);
+     
+
+            if (pasajeActual == null) {
+               pasajeActual = new Pasaje(pasajero, colectivo, ruta, fechaViaje, horaViaje, asiento, precio);
+                pasajeData.guardarPasaje(pasajeActual);
+                JOptionPane.showMessageDialog(this, "Pasaje guardado");
+            } else {
+                pasajeActual.setPasajero(pasajero);
+                pasajeActual.setColectivo(colectivo);
+                pasajeActual.setRuta(ruta);
+                pasajeActual.setFechaViaje(fechaViaje);
+               pasajeActual.setHoraViaje(horaViaje);
+                pasajeActual.setAsiento(asiento);
+                pasajeActual.setPrecio(precio);
+                
+
+                pasajeData.modificarPasaje(pasajeActual);
+                // NO tenemos el metodo de modificar pasaje. 1) creamos un metodo q tenga esto o 2) no lo modificamos y le enviamos un showMessage que cargue los datos correctamente.
+           JOptionPane.showMessageDialog(this, "Pasaje actualizado");
+            }
+
+        } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "No se pudo guardar el pasaje");
         }
     }//GEN-LAST:event_jbGuardarActionPerformed
@@ -495,30 +505,25 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         // TODO add your handling code here:
         try {
-            
-             String dni = jtfDocumento.getText();
-             //ahora creamos el objeto "aludata" arriba de esta clase
-             pasajeroActual = pasajeroData.buscarPasajeroPorDni(dni);
-             
-             if(pasajeroActual != null){
-                 
-                 jtfApellido.setText(pasajeroActual.getApellido());
-                 jtfNombre.setText(pasajeroActual.getNombre());
-                 jtfTelefono.setText(pasajeroActual.getTelefono());
-                 jtfCorreo.setText(pasajeroActual.getCorreo());
-             }            
-        } catch(NumberFormatException msj){
-        
+
+            String dni = jtfDocumento.getText();
+            //ahora creamos el objeto "aludata" arriba de esta clase
+            pasajeroActual = pasajeroData.buscarPasajeroPorDni(dni);
+
+            if (pasajeroActual != null) {
+
+                jtfApellido.setText(pasajeroActual.getApellido());
+                jtfNombre.setText(pasajeroActual.getNombre());
+                jtfTelefono.setText(pasajeroActual.getTelefono());
+                jtfCorreo.setText(pasajeroActual.getCorreo());
+            }
+        } catch (NumberFormatException msj) {
+
             JOptionPane.showMessageDialog(this, "Debe ingresar un DNI válido");
     }//GEN-LAST:event_jbBuscarActionPerformed
     }
-
-    
-    
-        
-        
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<Integer> comboAsiento;
+    private javax.swing.JComboBox comboAsiento;
     private javax.swing.JComboBox<Colectivo> comboColectivo;
     private javax.swing.JComboBox<Horario> comboHorario;
     private javax.swing.JComboBox comboRuta;
@@ -554,4 +559,5 @@ public class VentaDePasajes extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtfPrecio;
     private javax.swing.JTextField jtfTelefono;
     // End of variables declaration//GEN-END:variables
+
 }

@@ -55,7 +55,7 @@ public class PasajeData {
         
         } catch (SQLException ex) {
 
-            JOptionPane.showMessageDialog(null, "Error al vender el pasaje");
+            JOptionPane.showMessageDialog(null, "Error al vender el pasaje"+ex);
             
         }
         
@@ -373,4 +373,32 @@ public class PasajeData {
         return vendidos;
 
     }
+        public void modificarPasaje(Pasaje pasaje) {
+
+    String sql = "UPDATE pasajes SET idColectivo = ?, idRuta = ?, fechaViaje = ?, horaViaje = ?, asiento = ?, precio = ? WHERE idPasaje = ?";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        ps.setInt(1, pasaje.getColectivo().getIdColectivo());
+        ps.setInt(2, pasaje.getRuta().getIdRuta());
+        ps.setDate(3, Date.valueOf(pasaje.getFechaViaje()));
+        ps.setTime(4, Time.valueOf(pasaje.getHoraViaje()));
+        ps.setInt(5, pasaje.getAsiento());
+        ps.setDouble(6, pasaje.getPrecio());
+        ps.setInt(7, pasaje.getIdPasaje());
+
+        int exito = ps.executeUpdate();
+
+        if (exito == 1) {
+            JOptionPane.showMessageDialog(null, "Pasaje modificado exitosamente!");
+        }
+
+        ps.close();
+
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al modificar el pasaje");
+    }
+}
+        
 }
