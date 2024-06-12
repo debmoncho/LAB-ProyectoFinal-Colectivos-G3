@@ -379,15 +379,15 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
 
     private void jbAnularVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAnularVentaActionPerformed
         // TODO add your handling code here:
-        int filaSeleccionada = jTablaPV.getSelectedRow();
-        
-        if(filaSeleccionada != -1){
-            Alumno a = (Alumno)cboxAlumno.getSelectedItem();
-            int idMateria = (Integer)modelo.getValueAt(filaSeleccionada, 0);
-            inscData.borrarInscripcion(a.getIdAlumno(), idMateria);
-            borrarFilasTabla();
-            
-        }
+//        int filaSeleccionada = jTablaPV.getSelectedRow();
+//        
+//        if(filaSeleccionada != -1){
+//            Alumno a = (Alumno)cboxAlumno.getSelectedItem();
+//            int idMateria = (Integer)modelo.getValueAt(filaSeleccionada, 0);
+//            inscData.borrarInscripcion(a.getIdAlumno(), idMateria);
+//            borrarFilasTabla();
+//            
+//        }
     }//GEN-LAST:event_jbAnularVentaActionPerformed
 
 
