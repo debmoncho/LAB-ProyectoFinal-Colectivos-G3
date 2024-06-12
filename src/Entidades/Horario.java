@@ -71,7 +71,7 @@ public class Horario {
     
     @Override
     public String toString() {
-        return "Horario{" + "IdHorario=" + IdHorario + ", ruta=" + ruta + ", horaSalida=" + horaSalida + ", horaLlegada=" + horaLlegada + '}';
+        return "Horario: " + IdHorario + ", ruta: " + ruta + ", horaSalida: " + horaSalida + ", horaLlegada: " + horaLlegada;
     }
     
     
