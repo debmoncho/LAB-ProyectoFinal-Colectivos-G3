@@ -49,7 +49,10 @@
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jComboRuta" min="-2" pref="533" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jComboRuta" max="32767" attributes="0"/>
+                      <Component id="jdFecha" pref="533" max="32767" attributes="0"/>
+                  </Group>
                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                       <Component id="jtPrecio" alignment="0" max="32767" attributes="0"/>
                       <Component id="jComboColectivo" alignment="0" pref="530" max="32767" attributes="0"/>
@@ -138,8 +141,11 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                  <Component id="jdFecha" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jComboRuta" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -174,12 +180,6 @@
               <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
               <Component id="jScrollPane2" min="-2" pref="85" max="-2" attributes="0"/>
 <<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-              <EmptySpace pref="26" max="32767" attributes="0"/>
-=======
-<<<<<<< HEAD
->>>>>>> Stashed changes
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jButton3" pref="46" max="32767" attributes="0"/>
@@ -190,7 +190,6 @@
               <EmptySpace pref="21" max="32767" attributes="0"/>
 =======
               <EmptySpace pref="23" max="32767" attributes="0"/>
->>>>>>> 5cbc81f41f245f11e6ed05bdd26fbab9ab1fdc22
               <Component id="jButton3" min="-2" pref="46" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
@@ -355,6 +354,8 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Fecha de Viaje:"/>
       </Properties>
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="jdFecha">
     </Component>
     <Component class="javax.swing.JButton" name="jGuardar">
       <Properties>
