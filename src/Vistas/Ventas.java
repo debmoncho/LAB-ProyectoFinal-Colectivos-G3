@@ -169,7 +169,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jtaRecibo = new javax.swing.JTextArea();
 
         setClosable(true);
         setIconifiable(true);
@@ -234,7 +234,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         jLabel8.setText("Fecha de Viaje:");
 
         jGuardar.setText("Guardar Venta");
-        jGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -252,7 +252,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton1.setText("Salir");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -301,19 +301,19 @@ public class Ventas extends javax.swing.JInternalFrame {
 
         jButton3.setBackground(new java.awt.Color(255, 0, 51));
         jButton3.setText("Anular Venta de Pasaje Emitido");
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton4.setBackground(new java.awt.Color(0, 204, 0));
         jButton4.setText("Emitir Factura de Pasaje");
-        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("(Aca podria cargar los datos del pasaje emitido)");
-        jTextArea1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
-        jScrollPane3.setViewportView(jTextArea1);
+        jtaRecibo.setColumns(20);
+        jtaRecibo.setRows(5);
+        jtaRecibo.setText("(Aca podria cargar los datos del pasaje emitido)");
+        jtaRecibo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
+        jScrollPane3.setViewportView(jtaRecibo);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -387,7 +387,7 @@ public class Ventas extends javax.swing.JInternalFrame {
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel3)
-                    .addComponent(jDni, javax.swing.GroupLayout.PREFERRED_SIZE, 22, Short.MAX_VALUE))
+                    .addComponent(jDni))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -485,6 +485,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         Pasaje pasaje=new Pasaje(0, pasajero, colectivo, ruta, lc, horaViaje, asiento, precio);
 //        JOptionPane.showMessageDialog(null, info);
             pasajeD.guardarPasaje(pasaje);
+            jtaRecibo.setText(pasaje.mensajeRecibo());
     }//GEN-LAST:event_jGuardarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -519,8 +520,8 @@ public class Ventas extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTabla;
     private javax.swing.JTable jTabla1;
-    private javax.swing.JTextArea jTextArea1;
     private com.toedter.calendar.JDateChooser jdFecha;
     private javax.swing.JTextField jtPrecio;
+    private javax.swing.JTextArea jtaRecibo;
     // End of variables declaration//GEN-END:variables
 }

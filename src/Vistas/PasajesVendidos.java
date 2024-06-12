@@ -88,7 +88,7 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
         jLabel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jButton1.setText("Salir");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -134,21 +134,21 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTablaPV);
 
-        jcbFiltrarPorRuta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jcbFiltrarPorRuta.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jcbFiltrarPorRuta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbFiltrarPorRutaActionPerformed(evt);
             }
         });
 
-        JCBFiltrarPorHorario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        JCBFiltrarPorHorario.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         JCBFiltrarPorHorario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JCBFiltrarPorHorarioActionPerformed(evt);
             }
         });
 
-        JCBFiltrarPorPasajero.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        JCBFiltrarPorPasajero.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         JCBFiltrarPorPasajero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JCBFiltrarPorPasajeroActionPerformed(evt);
@@ -205,7 +205,7 @@ public class PasajesVendidos extends javax.swing.JInternalFrame {
                     .addComponent(JCBFiltrarPorPasajero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(268, Short.MAX_VALUE))
         );
 
         pack();
