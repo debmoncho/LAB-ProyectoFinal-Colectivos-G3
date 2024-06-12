@@ -169,6 +169,7 @@ public class Ventas extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jtaRecibo = new javax.swing.JTextArea();
+        jLabel15 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -278,7 +279,7 @@ public class Ventas extends javax.swing.JInternalFrame {
 
         jLabel14.setFont(new java.awt.Font("Trebuchet MS", 2, 14)); // NOI18N
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("Si lo desea, seleccione un pasaje de la tabla y anulelo. O emita la factura de Venta");
+        jLabel14.setText("A continuación se emitira la factura de su pasaje");
         jLabel14.setToolTipText("");
         jLabel14.setAlignmentY(0.0F);
         jLabel14.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), null));
@@ -308,6 +309,15 @@ public class Ventas extends javax.swing.JInternalFrame {
         jtaRecibo.setText("(Aca podria cargar los datos del pasaje emitido)");
         jtaRecibo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
         jScrollPane3.setViewportView(jtaRecibo);
+
+        jLabel15.setFont(new java.awt.Font("Trebuchet MS", 2, 14)); // NOI18N
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("Si lo desea, seleccione un pasaje de la tabla y anulelo. O emita la factura de Venta");
+        jLabel15.setToolTipText("");
+        jLabel15.setAlignmentY(0.0F);
+        jLabel15.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), null));
+        jLabel15.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel15.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -343,7 +353,6 @@ public class Ventas extends javax.swing.JInternalFrame {
                         .addComponent(jComboHora, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jComboAsiento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(18, 18, 18))
-            .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 701, Short.MAX_VALUE)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(jScrollPane2)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -362,13 +371,22 @@ public class Ventas extends javax.swing.JInternalFrame {
                 .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(87, 87, 87)
+                .addGap(86, 86, 86)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
+                    .addContainerGap()))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         layout.setVerticalGroup(
@@ -414,20 +432,25 @@ public class Ventas extends javax.swing.JInternalFrame {
                     .addComponent(jtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jGuardar)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel14)
-                .addGap(18, 18, 18)
+                .addGap(58, 58, 58)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(43, 43, 43)
                     .addComponent(jLabel13)
                     .addContainerGap(913, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(568, Short.MAX_VALUE)
+                    .addComponent(jLabel15)
+                    .addGap(388, 388, 388)))
         );
 
         pack();
@@ -498,6 +521,7 @@ public class Ventas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
