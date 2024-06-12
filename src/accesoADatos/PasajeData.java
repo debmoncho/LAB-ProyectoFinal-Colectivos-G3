@@ -23,7 +23,9 @@ public class PasajeData {
         con = Conexion.getConexion();
     }
     
-     public void guardarPasaje(Pasaje pasaje){
+    
+    
+    public void guardarPasaje(Pasaje pasaje){
         
         String sql = "INSERT INTO pasajes (idPasajero, idColectivo, idRuta, fechaViaje, horaViaje, asiento, precio) VALUES (?, ?, ?, ?, ?, ?, ?)";
     
@@ -61,7 +63,8 @@ public class PasajeData {
         
     }
      
-         public void borrarPasaje(int idPasajero, int idRuta){
+    
+    public void borrarPasaje(int idPasajero, int idRuta){
         
         String sql = "DELETE FROM pasajes WHERE idPasajero = ? AND idRuta = ?";
         
@@ -89,7 +92,8 @@ public class PasajeData {
         
     }
          
-         public void actualizarFechaViaje(int idPasajero, int idRuta, LocalDate fechaViaje){
+    
+    public void actualizarFechaViaje(int idPasajero, int idRuta, LocalDate fechaViaje){
     
         String sql = "UPDATE pasajes SET fechaViaje = ? WHERE idPasajero = ? AND idRuta = ?";
         
@@ -119,7 +123,8 @@ public class PasajeData {
 
     }
          
-         public void actualizarHoraViaje(int idPasajero, int idRuta, LocalTime horaViaje){
+    
+    public void actualizarHoraViaje(int idPasajero, int idRuta, LocalTime horaViaje){
     
         String sql = "UPDATE pasajes SET horaViaje = ? WHERE idPasajero = ? AND idRuta = ?";
         
@@ -149,8 +154,9 @@ public class PasajeData {
 
     }
          
+    
              
-        public List<Pasaje> obtenerPasajes() {
+    public List<Pasaje> obtenerPasajes() {
 
         ArrayList<Pasaje> vendidos = new ArrayList<>();
 
@@ -236,6 +242,8 @@ public class PasajeData {
         return vendidos;
 
     }
+    
+    
     
     public List<Pasaje> obtenerPasajeVendidoPorRuta(int idRuta) {
 
@@ -328,7 +336,9 @@ public class PasajeData {
         return vendidos;
     }
     
-        public List<Pasaje> obtenerPasajeVendidoPorHorario(LocalTime horaViaje) {
+    
+    
+    public List<Pasaje> obtenerPasajeVendidoPorHorario(LocalTime horaViaje) {
 
         ArrayList<Pasaje> vendidos = new ArrayList<>();
 
