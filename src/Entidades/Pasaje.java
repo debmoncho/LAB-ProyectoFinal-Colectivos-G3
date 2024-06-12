@@ -104,9 +104,21 @@ public class Pasaje {
         this.precio = precio;
     }
 
+    public String mensajeRecibo() {
+        return "Gracias por viajar con nosotros!\n"
+                + "Nro de pasaje: " + this.IdPasaje + "\n"
+                + "Pasajero: " + this.pasajero + "\n"
+                + "Colectivo: " + this.colectivo + "\n"
+                + "Ruta: " + this.ruta + "\n"
+                + "Fecha de viaje: " + this.fechaViaje + "\n"
+                + "Hora de viaje: " + this.horaViaje + "\n"
+                + "Asiento: " + this.asiento + "\n"
+                + "Precio: " + this.precio;
+    }
+  
     @Override
     public String toString() {
-        return "Pasaje{" + "IdPasaje=" + IdPasaje + ", pasajero=" + pasajero + ", colectivo=" + colectivo + ", ruta=" + ruta + ", fechaViaje=" + fechaViaje + ", horaViaje=" + horaViaje + ", asiento=" + asiento + ", precio=" + precio + '}';
+        return "IdPasaje=" + IdPasaje + ", pasajero=" + pasajero + ", colectivo=" + colectivo + ", ruta=" + ruta + ", fechaViaje=" + fechaViaje + ", horaViaje=" + horaViaje + ", asiento=" + asiento + ", precio=" + precio + '}';
     }
     
     
