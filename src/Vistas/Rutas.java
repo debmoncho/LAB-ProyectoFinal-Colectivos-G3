@@ -286,21 +286,21 @@ public class Rutas extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         String origen = jtOrigen.getText();
         String destino = jtDestino.getText();
-        String duracion = (String)jCombo.getSelectedItem();
-        try{
+        String duracion = (String) jCombo.getSelectedItem();
+        try {
             if (!origen.isEmpty() && !destino.isEmpty()) {
-                LocalTime dura = LocalTime.parse(duracion,DateTimeFormatter.ofPattern("H:mm"));
+                LocalTime dura = LocalTime.parse(duracion, DateTimeFormatter.ofPattern("H:mm"));
                 Ruta ruta = new Ruta(origen, destino, dura, true);
                 rutadata.guardarRuta(ruta);
                 jtOrigen.setText("");
                 jtDestino.setText("");
-                modelo.addRow(new Object[]{origen, destino,duracion});
+                modelo.addRow(new Object[]{origen, destino, duracion});
                 jCombo.setToolTipText("");
-                
+
             } else {
                 JOptionPane.showMessageDialog(this, "Complete todos lo compos");
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "error cargar datos");
         }
     }//GEN-LAST:event_jbGuardarActionPerformed
@@ -309,9 +309,13 @@ public class Rutas extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 
         ButtonModel selection = buttonGroup1.getSelection();
+        if (jrOrigen.isSelected()) {
+            cargarOrigen();
+        } else if (jrDestino.isSelected()) {
+            cargarDestino();
+        }
 
-        
-        int a = 2;
+        //int a = 2;
     }//GEN-LAST:event_jBuscarActionPerformed
 
     private void jrOrigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrOrigenActionPerformed
@@ -353,11 +357,26 @@ private void armarCabecera() {
         }
         jTabla.setModel(modelo);
     }
-private void cargarRutas(){
-    List<Ruta> lista = rutadata.listarRuta();
-    for (Ruta r : lista) {
-        modelo.addRow(new Object[]{r.getOrigen(),r.getDestino(),r.getDuracionEstimada()});
-        System.out.println("");
+
+    private void cargarRutas() {
+        List<Ruta> lista = rutadata.listarRuta();
+        for (Ruta r : lista) {
+            modelo.addRow(new Object[]{r.getOrigen(), r.getDestino(), r.getDuracionEstimada()});
+            System.out.println("");
+        }
     }
-}
+
+    private void cargarOrigen() {
+        List<Ruta> lista = rutadata.listarOrigen();
+        for (Ruta ruta : lista) {
+            modelo.addRow(new Object[]{ruta.getOrigen()});
+        }
+    }
+    
+    private void cargarDestino(){
+        List<Ruta> lista = rutadata.listarDestino();
+        for (Ruta ruta : lista) {          
+            modelo.addRow(new Object[]{" ",ruta.getDestino()});
+        }
+    }
 }
